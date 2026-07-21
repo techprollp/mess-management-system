@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Room 803 Mess</title>
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Target for layout injection by app.js -->
+    <div id="app">
+        
+        <!-- Header Bar -->
+        <div class="header-bar">
+            <div class="page-title">
+                <h2>Dashboard Overview</h2>
+                <p>Real-time room analytics, meal counts, and payment ledgers.</p>
+            </div>
+            <div class="header-actions">
+                <div style="display:flex; align-items:center; gap:6px;">
+                    <label for="global-month-picker" style="font-size:11px; font-weight:700; color:var(--text-muted); margin:0;">Month:</label>
+                    <input type="month" id="global-month-picker" class="form-control" style="width:140px; font-size:12px; font-weight:700; padding:4px 8px; border-radius:var(--radius-sm); border:1.5px solid var(--primary-light);">
+                </div>
+                <button class="btn btn-outline global-sync-btn"><i class="fa-solid fa-rotate"></i> Sync Cloud</button>
+                <button class="btn btn-outline global-backup-btn"><i class="fa-solid fa-cloud-arrow-down"></i> Backup</button>
+                <a href="attendance.html" class="btn btn-primary"><i class="fa-solid fa-clipboard-user"></i> Mark Attendance</a>
+            </div>
+        </div>
+
+        <!-- Metric KPI Cards Grid -->
+        <div class="stats-grid">
+            <div class="stat-card info">
+                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Active Roommates</div>
+                    <div class="stat-value" id="kpi-members">--</div>
+                </div>
+            </div>
+
+            <div class="stat-card warning">
+                <div class="stat-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Monthly Expenses</div>
+                    <div class="stat-value" id="kpi-expenses">AED 0</div>
+                </div>
+            </div>
+
+            <div class="stat-card success">
+                <div class="stat-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Total Collected</div>
+                    <div class="stat-value" id="kpi-collected">AED 0</div>
+                </div>
+            </div>
+
+            <div class="stat-card danger">
+                <div class="stat-icon"><i class="fa-solid fa-scale-unbalanced"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Pending Dues Balance</div>
+                    <div class="stat-value" id="kpi-balance">AED 0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Closing Banner & Controls -->
+        <div class="card" id="monthly-closing-banner" style="margin-bottom: 24px; padding: 16px 20px; background: linear-gradient(135deg, rgba(37,99,235,0.06), rgba(16,185,129,0.06)); border: 1.5px solid var(--primary-light); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--primary-light); color: white; display: flex; justify-content: center; align-items: center; font-size: 18px;">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <h3 style="font-size: 16px; font-weight: 700; margin: 0;">Mess Month Closing Status</h3>
+                        <span id="closing-status-badge" class="badge badge-success">Active Cycle</span>
+                    </div>
+                    <p id="closing-status-desc" style="font-size: 12px; color: var(--text-muted); margin: 2px 0 0 0;">Mess Period: 10th of month to 9th of next month. Expenses reset to 0 on 10th.</p>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;" id="closing-actions-container">
+                <button id="download-csv-btn" class="btn btn-outline btn-sm" style="color: #166534; border-color: #166534;"><i class="fa-solid fa-file-excel"></i> Download CSV Ledger</button>
+                <a href="reports.html" id="download-pdf-btn" class="btn btn-outline btn-sm" style="color: var(--primary-light); border-color: var(--primary-light);"><i class="fa-solid fa-file-pdf"></i> View & Print Statement</a>
+                <button id="close-month-btn" class="btn btn-primary btn-sm"><i class="fa-solid fa-file-signature"></i> Finalize & Close Month</button>
+            </div>
+        </div>
+
+        <!-- Monthly Closing Balance & Pro-Rata Banner -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom: 24px;" class="dashboard-grid">
+            <div class="card" style="background: linear-gradient(135deg, var(--bg-card), var(--border-color)); padding: 20px; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div class="stat-icon" style="background-color: rgba(59, 130, 246, 0.1); color: var(--primary-light); width: 48px; height: 48px; font-size: 20px;">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: var(--text-muted); font-weight:600; text-transform: uppercase;">Cost Per Meal</div>
+                        <div style="font-size: 22px; font-weight:800; color: var(--primary-light);" id="kpi-cost-per-meal">AED 0.000 / meal</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, rgba(245,158,11,0.05), rgba(245,158,11,0.02)); border-color: rgba(245,158,11,0.2); padding: 20px; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div class="stat-icon" style="background-color: rgba(245, 158, 11, 0.1); color: var(--warning); width: 48px; height: 48px; font-size: 20px;">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: var(--text-muted); font-weight:600; text-transform: uppercase;">Previous Month Closing Carry-over</div>
+                        <div style="font-size: 22px; font-weight:800; color: var(--warning);" id="kpi-prev-closing">AED 0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Charts & Breakdown -->
+        <div class="dashboard-grid">
+            
+            <!-- Expenses vs Collections Visual Chart -->
+            <div class="card">
+                <div class="card-title">
+                    <span><i class="fa-solid fa-chart-column"></i> Financial Overview</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="financeChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Expense Category Share Pie Chart -->
+            <div class="card">
+                <div class="card-title">
+                    <span><i class="fa-solid fa-pie-chart"></i> Expenses Breakdown</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Roommate Dues Table -->
+        <div class="card">
+            <div class="card-title">
+                <span><i class="fa-solid fa-users"></i> Roommate Dues Summary for Selected Month</span>
+                <a href="payments.html" style="font-size:12px; text-decoration:none; color:var(--primary-light);">Record Payments <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Desktop View -->
+            <div class="table-responsive desktop-table-only">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Roommate Name</th>
+                            <th>Contact</th>
+                            <th>Applicable Invoices</th>
+                            <th>Targeted Share Amount</th>
+                            <th>Payment Status</th>
+                            <th style="text-align: right;">Quick Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashboard-dues-tbody">
+                        <!-- Loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile View -->
+            <div id="dashboard-dues-mobile" style="display: none;">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script dependencies -->
+    <script src="js/storage.js?v=13.0"></script>
+    <script src="js/app.js?v=13.0"></script>
+    <script src="js/dashboard.js?v=13.0"></script>
+</body>
+</html>

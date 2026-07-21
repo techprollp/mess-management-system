@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Members - Room 803 Mess</title>
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Target for layout injection by app.js -->
+    <div id="app">
+        
+        <!-- Header Bar -->
+        <div class="header-bar">
+            <div class="page-title">
+                <h2>Members Directory</h2>
+                <p>Add, edit, and manage room mess active members.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="open-add-member-modal-btn"><i class="fa-solid fa-user-plus"></i> Add New Member</button>
+            </div>
+        </div>
+
+        <!-- Filter and Search Toolbar -->
+        <div class="card" style="padding: 16px; margin-bottom: 20px;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;" class="form-row">
+                <div style="position: relative;">
+                    <input type="text" id="member-search" class="form-control" placeholder="Search members by name or phone..." style="padding-left: 40px;">
+                    <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 16px; top: 14px; color: var(--text-muted);"></i>
+                </div>
+                <div>
+                    <select id="status-filter" class="form-control">
+                        <option value="all">All Statuses</option>
+                        <option value="active">Active Members</option>
+                        <option value="inactive">Inactive Members</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Directory Content -->
+        <div class="card">
+            <!-- Desktop Layout -->
+            <div class="table-responsive desktop-table-only">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Member Name</th>
+                            <th>Phone Number</th>
+                            <th>Email Address</th>
+                            <th>Status</th>
+                            <th>Joined Date</th>
+                            <th style="text-align: right;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="members-table-body">
+                        <!-- Loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile Layout -->
+            <div id="members-mobile-list" style="display: none;">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Add New Member Modal Dialog -->
+    <div id="add-member-modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Add New Roommate Member</h3>
+                <button class="modal-close" id="close-add-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="add-member-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="add-member-name">Full Name *</label>
+                        <input type="text" id="add-member-name" class="form-control" placeholder="e.g. Shareef" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="add-member-phone">Phone Number *</label>
+                        <input type="tel" id="add-member-phone" class="form-control" placeholder="+971 50 123 4567" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="add-member-email">Email Address (Optional)</label>
+                        <input type="email" id="add-member-email" class="form-control" placeholder="roommate@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="add-member-date">Joined Date *</label>
+                        <input type="date" id="add-member-date" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-add-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Save & Add Member</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Member Modal Dialog -->
+    <div id="edit-member-modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Edit Member Details</h3>
+                <button class="modal-close" id="close-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="edit-member-form">
+                <div class="modal-body">
+                    <input type="hidden" id="edit-member-id">
+                    
+                    <div class="form-group">
+                        <label for="edit-member-name">Full Name</label>
+                        <input type="text" id="edit-member-name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-member-phone">Phone Number</label>
+                        <input type="tel" id="edit-member-phone" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-member-email">Email Address</label>
+                        <input type="email" id="edit-member-email" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-member-status">Membership Status</label>
+                        <select id="edit-member-status" class="form-control">
+                            <option value="active">Active (Participating in mess cost split)</option>
+                            <option value="inactive">Inactive (Not participating)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-edit-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script dependencies -->
+    <script src="js/storage.js?v=23.0"></script>
+    <script src="js/app.js?v=23.0"></script>
+    <script src="js/members.js?v=23.0"></script>
+</body>
+</html>

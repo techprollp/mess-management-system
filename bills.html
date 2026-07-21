@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bills & Expenses - Room 803 Mess</title>
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Target for layout injection by app.js -->
+    <div id="app">
+        
+        <!-- Header Bar -->
+        <div class="header-bar">
+            <div class="page-title">
+                <h2>Bills & Shared Expenses</h2>
+                <p>Register, edit, and track shared mess invoices, receipts, and targeted roommate splits.</p>
+            </div>
+            <div class="header-actions">
+                <div style="display:flex; align-items:center; gap:6px;">
+                    <label for="global-month-picker" style="font-size:11px; font-weight:700; color:var(--text-muted); margin:0;">Month:</label>
+                    <input type="month" id="global-month-picker" class="form-control" style="width:140px; font-size:12px; font-weight:700; padding:4px 8px; border-radius:var(--radius-sm); border:1.5px solid var(--primary-light);">
+                </div>
+                <button class="btn btn-outline global-sync-btn"><i class="fa-solid fa-rotate"></i> Sync Cloud</button>
+                <button class="btn btn-outline global-backup-btn"><i class="fa-solid fa-cloud-arrow-down"></i> Backup</button>
+                <button id="open-add-bill-btn" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus"></i> Add New Expense</button>
+            </div>
+        </div>
+
+        <!-- Monthly Closing Banner on Bills Page -->
+        <div class="card" id="bills-closing-banner" style="margin-bottom: 20px; padding: 12px 18px; background: rgba(37,99,235,0.05); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span id="bills-closing-badge" class="badge badge-success">Active Cycle</span>
+                <span id="bills-closing-desc" style="font-size: 13px; color: var(--text-muted);">Current period: 10th of month to 9th of next month.</span>
+            </div>
+            <button id="close-month-btn" class="btn btn-primary btn-sm"><i class="fa-solid fa-file-signature"></i> Finalize & Close Month</button>
+        </div>
+
+        <!-- Expense Summary Cards -->
+        <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="stat-card warning">
+                <div class="stat-icon"><i class="fa-solid fa-receipt"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Total Selected Month Expenses</div>
+                    <div class="stat-value" id="total-expenses-value">AED 0</div>
+                </div>
+            </div>
+
+            <div class="stat-card info">
+                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Active Roommates Sharing</div>
+                    <div class="stat-value" id="active-members-count">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expenses Directory Card -->
+        <div class="card">
+            <div class="card-title">
+                <span><i class="fa-solid fa-receipt"></i> Expense Records & Invoices</span>
+            </div>
+
+            <!-- Desktop View -->
+            <div class="table-responsive desktop-table-only">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Bill Item Title</th>
+                            <th>Category</th>
+                            <th>Amount (AED)</th>
+                            <th>Targeted Roommates</th>
+                            <th>Date</th>
+                            <th>Invoice / Receipt</th>
+                            <th style="text-align: right;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bills-table-body">
+                        <!-- Loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile View -->
+            <div id="bills-mobile-list" style="display: none;">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal Dialog: Register New Expense -->
+    <div id="add-bill-modal" class="modal-overlay">
+        <div class="modal-container" style="max-width: 550px;">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-file-circle-plus"></i> Add New Mess Expense</h3>
+                <button class="modal-close" id="close-bill-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="add-bill-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="bill-title">Bill Item Title *</label>
+                        <input type="text" id="bill-title" class="form-control" placeholder="e.g. Weekly Grocery Shopping, WiFi Bill" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bill-amount">Amount (AED) *</label>
+                        <input type="number" id="bill-amount" class="form-control" step="0.01" min="0.01" placeholder="e.g. 250.00" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bill-date">Invoice Date *</label>
+                        <input type="date" id="bill-date" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bill-category">Category *</label>
+                        <select id="bill-category" class="form-control" required>
+                            <option value="Groceries">Groceries / Supermarket</option>
+                            <option value="Food">Food / Fresh Meat / Cooking</option>
+                            <option value="Electricity">DEWA / Electricity & Water</option>
+                            <option value="Internet">Internet / WiFi Connection</option>
+                            <option value="Gas">Cooking Gas Cylinder</option>
+                            <option value="Rent">Room Rent</option>
+                            <option value="Maintenance">Room Cleaning / Maintenance</option>
+                            <option value="Others">Others / Miscellaneous</option>
+                        </select>
+                    </div>
+
+                    <!-- Targeted Roommates Selector -->
+                    <div class="form-group" style="background: var(--bg-card); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <label style="font-weight: 700; display: block; margin-bottom: 6px;">
+                            <i class="fa-solid fa-user-gear"></i> Target Roommate Scope:
+                        </label>
+                        
+                        <div style="display: flex; gap: 16px; margin-bottom: 10px;">
+                            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                                <input type="radio" name="bill-scope" id="scope-all" value="all" checked>
+                                <span>All Roommates</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                                <input type="radio" name="bill-scope" id="scope-specific" value="specific">
+                                <span>Specific Roommates Only</span>
+                            </label>
+                        </div>
+
+                        <!-- Specific Roommates Checklist -->
+                        <div id="specific-members-container" style="display: none; border-top: 1px dashed var(--border-color); padding-top: 8px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Select Roommates for this Bill:</span>
+                                <button type="button" id="toggle-all-bill-members" class="btn btn-outline btn-sm" style="font-size: 10px; padding: 2px 6px;">Select All</button>
+                            </div>
+                            <div id="bill-members-checklist" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; max-height: 140px; overflow-y: auto;">
+                                <!-- Checkboxes populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bill-notes">Notes / Item Details (Optional)</label>
+                        <textarea id="bill-notes" class="form-control" rows="2" placeholder="List items bought or vendor name..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bill-invoice">Upload Receipt / PDF Invoice (Optional)</label>
+                        <input type="file" id="bill-invoice" class="form-control" accept="image/*,.pdf">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-bill-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Expense</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Dialog: Edit Existing Expense -->
+    <div id="edit-bill-modal" class="modal-overlay">
+        <div class="modal-container" style="max-width: 550px;">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-pen-to-square"></i> Edit Expense Invoice</h3>
+                <button class="modal-close" id="close-edit-bill-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="edit-bill-form">
+                <input type="hidden" id="edit-bill-id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="edit-bill-title">Bill Item Title *</label>
+                        <input type="text" id="edit-bill-title" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-bill-amount">Amount (AED) *</label>
+                        <input type="number" id="edit-bill-amount" class="form-control" step="0.01" min="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-bill-date">Invoice Date *</label>
+                        <input type="date" id="edit-bill-date" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-bill-category">Category *</label>
+                        <select id="edit-bill-category" class="form-control" required>
+                            <option value="Groceries">Groceries / Supermarket</option>
+                            <option value="Food">Food / Fresh Meat / Cooking</option>
+                            <option value="Electricity">DEWA / Electricity & Water</option>
+                            <option value="Internet">Internet / WiFi Connection</option>
+                            <option value="Gas">Cooking Gas Cylinder</option>
+                            <option value="Rent">Room Rent</option>
+                            <option value="Maintenance">Room Cleaning / Maintenance</option>
+                            <option value="Others">Others / Miscellaneous</option>
+                        </select>
+                    </div>
+
+                    <!-- Targeted Roommates Selector for Edit -->
+                    <div class="form-group" style="background: var(--bg-card); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <label style="font-weight: 700; display: block; margin-bottom: 6px;">
+                            <i class="fa-solid fa-user-gear"></i> Target Roommate Scope:
+                        </label>
+                        
+                        <div style="display: flex; gap: 16px; margin-bottom: 10px;">
+                            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                                <input type="radio" name="edit-bill-scope" id="edit-scope-all" value="all" checked>
+                                <span>All Roommates</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                                <input type="radio" name="edit-bill-scope" id="edit-scope-specific" value="specific">
+                                <span>Specific Roommates Only</span>
+                            </label>
+                        </div>
+
+                        <div id="edit-specific-members-container" style="display: none; border-top: 1px dashed var(--border-color); padding-top: 8px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Select Roommates for this Bill:</span>
+                                <button type="button" id="edit-toggle-all-bill-members" class="btn btn-outline btn-sm" style="font-size: 10px; padding: 2px 6px;">Select All</button>
+                            </div>
+                            <div id="edit-bill-members-checklist" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; max-height: 140px; overflow-y: auto;">
+                                <!-- Checkboxes populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-bill-notes">Notes / Item Details (Optional)</label>
+                        <textarea id="edit-bill-notes" class="form-control" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-bill-invoice">Replace Receipt / PDF Invoice (Optional)</label>
+                        <input type="file" id="edit-bill-invoice" class="form-control" accept="image/*,.pdf">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-edit-bill-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Update Expense</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script dependencies -->
+    <script src="js/storage.js?v=15.0"></script>
+    <script src="js/app.js?v=15.0"></script>
+    <script src="js/bills.js?v=15.0"></script>
+</body>
+</html>

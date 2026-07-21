@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mess Settings - Room 803 Mess</title>
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Target for layout injection by app.js -->
+    <div id="app">
+        
+        <!-- Header Bar -->
+        <div class="header-bar">
+            <div class="page-title">
+                <h2>System Settings</h2>
+                <p>Configure room metadata, currency, edit passwords, manage mess rules, and control Supabase cloud sync.</p>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;" class="dashboard-grid">
+            
+            <!-- Left Column: General, Security, Rules & Supabase Sync -->
+            <div style="display:flex; flex-direction:column; gap:24px;">
+                <!-- General Settings Card -->
+                <div class="card">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-sliders"></i> General Configuration</span>
+                    </div>
+                    <form id="general-settings-form">
+                        <div class="form-group">
+                            <label for="settings-room">Room Number</label>
+                            <input type="text" id="settings-room" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="settings-currency">System Currency</label>
+                            <input type="text" id="settings-currency" class="form-control" placeholder="e.g. AED, USD, INR" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fa-solid fa-floppy-disk"></i> Save Configurations</button>
+                    </form>
+                </div>
+
+                <!-- Supabase Cloud Sync Card -->
+                <div class="card" style="border: 1px solid var(--primary-light); background: linear-gradient(180deg, var(--bg-card), rgba(59,130,246,0.02));">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-bolt" style="color:var(--success);"></i> Supabase Real-Time Cloud Sync</span>
+                        <span id="sync-status-badge" class="badge badge-success">Connected</span>
+                    </div>
+                    <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;">
+                        Configure a free Supabase PostgreSQL Database to synchronize Room 803 Mess data automatically across all laptops and mobiles in real time.
+                    </p>
+                    
+                    <form id="supabase-sync-form">
+                        <div class="form-group">
+                            <label for="sb-url">Project URL *</label>
+                            <input type="text" id="sb-url" class="form-control" placeholder="https://xyz.supabase.co" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sb-key">Anon / Public Key *</label>
+                            <input type="password" id="sb-key" class="form-control" placeholder="sb_publishable_..." required>
+                        </div>
+                        
+                        <div style="display:flex; gap:12px; margin-top: 20px;">
+                            <button type="button" class="btn btn-danger" id="disable-sync-btn" style="flex:1;"><i class="fa-solid fa-power-off"></i> Turn Off Sync</button>
+                            <button type="submit" class="btn btn-primary" id="enable-sync-btn" style="flex:2;"><i class="fa-solid fa-cloud-arrow-up"></i> Save & Reconnect</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Admin Security Credentials -->
+                <div class="card">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-lock"></i> Change Admin Password</span>
+                    </div>
+                    <form id="change-pw-form">
+                        <div class="form-group">
+                            <label for="old-pw">Current Password</label>
+                            <input type="password" id="old-pw" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-pw">New Password</label>
+                            <input type="password" id="new-pw" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-pw">Confirm New Password</label>
+                            <input type="password" id="confirm-pw" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-outline" style="width: 100%;"><i class="fa-solid fa-key"></i> Update Password</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Column: Room Mess Rules & Database Backup -->
+            <div style="display:flex; flex-direction:column; gap:24px;">
+                <!-- Room Mess Rules Manager Card -->
+                <div class="card">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-list-check"></i> Manage Room Mess Rules</span>
+                    </div>
+                    <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;">
+                        Rules added here are automatically displayed on the public Home page (`index.html`) for all roommates to see.
+                    </p>
+
+                    <!-- Form to add rule -->
+                    <form id="add-rule-form" style="display:flex; gap:8px; margin-bottom: 16px;">
+                        <input type="text" id="new-rule-input" class="form-control" placeholder="e.g. No noise after 11 PM" required style="flex:1;">
+                        <button type="submit" class="btn btn-primary btn-sm" style="white-space:nowrap;"><i class="fa-solid fa-plus"></i> Add Rule</button>
+                    </form>
+
+                    <!-- Rules List -->
+                    <div id="rules-list-container" class="quick-list">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- Backup & Restore -->
+                <div class="card">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-database"></i> Database Backup & Restore</span>
+                    </div>
+                    
+                    <div style="margin-bottom: 24px;">
+                        <h4 style="font-size:14px; font-weight:700; margin-bottom:8px;"><i class="fa-solid fa-file-export"></i> Export Database</h4>
+                        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Download all members, invoices, payments, and attendance logs as a JSON file to keep an offline backup.</p>
+                        <button class="btn btn-outline" id="export-db-btn" style="width:100%;"><i class="fa-solid fa-cloud-arrow-down"></i> Export JSON Backup</button>
+                    </div>
+
+                    <div style="border-top:1px solid var(--border-color); padding-top:24px;">
+                        <h4 style="font-size:14px; font-weight:700; margin-bottom:8px;"><i class="fa-solid fa-file-import"></i> Restore from Backup</h4>
+                        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Restore all system data from a previously downloaded JSON backup file. WARNING: This overrides all current records.</p>
+                        <div style="display:flex; gap:12px;">
+                            <input type="file" id="import-db-file" accept=".json" class="form-control" style="padding: 7px 12px; flex: 2;">
+                            <button class="btn btn-primary" id="import-db-btn" style="flex: 1;"><i class="fa-solid fa-cloud-arrow-up"></i> Import</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Script dependencies -->
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const generalForm = document.getElementById("general-settings-form");
+            const pwForm = document.getElementById("change-pw-form");
+            const syncForm = document.getElementById("supabase-sync-form");
+            const addRuleForm = document.getElementById("add-rule-form");
+            
+            const roomInput = document.getElementById("settings-room");
+            const currencyInput = document.getElementById("settings-currency");
+            const rulesContainer = document.getElementById("rules-list-container");
+            const newRuleInput = document.getElementById("new-rule-input");
+            
+            const exportBtn = document.getElementById("export-db-btn");
+            const importBtn = document.getElementById("import-db-btn");
+            const importFile = document.getElementById("import-db-file");
+
+            const syncBadge = document.getElementById("sync-status-badge");
+            const disableSyncBtn = document.getElementById("disable-sync-btn");
+
+            // 1. Populate General settings
+            const settings = db.getSettings();
+            roomInput.value = settings.roomNo;
+            currencyInput.value = settings.currency;
+
+            // 2. Populate Rules Manager List
+            function renderRules() {
+                rulesContainer.innerHTML = "";
+                const rules = db.getRules();
+
+                if (rules.length === 0) {
+                    rulesContainer.innerHTML = `<p style="font-size:12px; color:var(--text-muted); padding:8px;">No room mess rules defined yet.</p>`;
+                    return;
+                }
+
+                rules.forEach((rule, index) => {
+                    const item = document.createElement("div");
+                    item.className = "quick-list-item";
+                    item.style.padding = "8px 12px";
+                    item.innerHTML = `
+                        <div class="quick-item-details" style="flex:1; padding-right:12px;">
+                            <span class="quick-item-title" style="font-size:13px; font-weight:500;">${index + 1}. ${rule}</span>
+                        </div>
+                        <div style="display:flex; gap:6px;">
+                            <button class="btn btn-outline btn-sm edit-rule-btn" data-index="${index}" style="padding:2px 8px; font-size:11px;"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn btn-danger btn-sm delete-rule-btn" data-index="${index}" style="padding:2px 8px; font-size:11px;"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                    rulesContainer.appendChild(item);
+                });
+
+                document.querySelectorAll(".edit-rule-btn").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const index = parseInt(btn.dataset.index);
+                        const rules = db.getRules();
+                        const newText = prompt("Edit Rule text:", rules[index]);
+                        if (newText && newText.trim()) {
+                            rules[index] = newText.trim();
+                            db.saveRules(rules);
+                            window.showToast("Rule updated.");
+                            renderRules();
+                        }
+                    });
+                });
+
+                document.querySelectorAll(".delete-rule-btn").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const index = parseInt(btn.dataset.index);
+                        const rules = db.getRules();
+                        if (confirm(`Delete rule: "${rules[index]}"?`)) {
+                            rules.splice(index, 1);
+                            db.saveRules(rules);
+                            window.showToast("Rule deleted.");
+                            renderRules();
+                        }
+                    });
+                });
+            }
+
+            addRuleForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const text = newRuleInput.value.trim();
+                if (text) {
+                    const rules = db.getRules();
+                    rules.push(text);
+                    db.saveRules(rules);
+                    newRuleInput.value = "";
+                    window.showToast("New rule added!");
+                    renderRules();
+                }
+            });
+
+            renderRules();
+
+            // 3. Populate Supabase Form
+            if (settings.supabaseEnabled && settings.supabaseConfig) {
+                document.getElementById("sb-url").value = settings.supabaseConfig.url;
+                document.getElementById("sb-key").value = settings.supabaseConfig.key;
+                
+                syncBadge.textContent = "Enabled (Connected)";
+                syncBadge.className = "badge badge-success";
+                disableSyncBtn.style.display = "block";
+            } else {
+                syncBadge.textContent = "Disabled";
+                syncBadge.className = "badge badge-danger";
+                disableSyncBtn.style.display = "none";
+            }
+
+            // 4. Save General Settings Form
+            generalForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const roomNo = roomInput.value.trim();
+                const currency = currencyInput.value.trim();
+
+                const updatedSettings = {
+                    ...db.getSettings(),
+                    roomNo,
+                    currency
+                };
+
+                db.saveSettings(updatedSettings);
+                window.showToast("Settings saved successfully! Reloading page...");
+                setTimeout(() => window.location.reload(), 1000);
+            });
+
+            // 5. Supabase Sync Form Activation
+            syncForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                
+                const url = document.getElementById("sb-url").value.trim();
+                const key = document.getElementById("sb-key").value.trim();
+
+                window.showToast("Connecting to Supabase...", "info");
+
+                const connected = await db.connectSupabase(url, key);
+
+                if (connected) {
+                    const currentSettings = db.getSettings();
+                    currentSettings.supabaseEnabled = true;
+                    currentSettings.supabaseConfig = { url, key };
+                    db.saveSettings(currentSettings);
+
+                    window.showToast("Connected! Syncing database...", "info");
+                    await db.syncToSupabase();
+
+                    window.showToast("Supabase Cloud Sync activated successfully!", "success");
+                    setTimeout(() => window.location.reload(), 1200);
+                } else {
+                    window.showToast("Failed to connect to Supabase. Check URL and Key.", "danger");
+                }
+            });
+
+            // 6. Disable Supabase Cloud Sync
+            disableSyncBtn.addEventListener("click", () => {
+                if (confirm("Are you sure you want to disable Supabase Cloud Sync? The website will fall back to using LocalStorage database on this device.")) {
+                    const currentSettings = db.getSettings();
+                    currentSettings.supabaseEnabled = false;
+                    currentSettings.supabaseConfig = null;
+                    db.saveSettings(currentSettings);
+
+                    window.showToast("Cloud Sync disabled. Reverted to LocalStorage.", "success");
+                    setTimeout(() => window.location.reload(), 1200);
+                }
+            });
+
+            // 7. Update Password
+            pwForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const oldPw = document.getElementById("old-pw").value;
+                const newPw = document.getElementById("new-pw").value;
+                const confirmPw = document.getElementById("confirm-pw").value;
+
+                const currentSettings = db.getSettings();
+                const actualOldPw = currentSettings.adminPassword || "admin";
+
+                if (oldPw !== actualOldPw) {
+                    window.showToast("Current password is incorrect.", "danger");
+                    return;
+                }
+
+                if (newPw !== confirmPw) {
+                    window.showToast("New passwords do not match.", "danger");
+                    return;
+                }
+
+                currentSettings.adminPassword = newPw;
+                db.saveSettings(currentSettings);
+                
+                window.showToast("Admin password changed successfully!");
+                pwForm.reset();
+            });
+
+            // 8. Export JSON Database Backup
+            exportBtn.addEventListener("click", () => {
+                const data = db.exportData();
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 4));
+                
+                const link = document.createElement("a");
+                link.setAttribute("href", dataStr);
+                link.setAttribute("download", `room_${settings.roomNo}_mess_database_backup.json`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                window.showToast("Database exported successfully!");
+            });
+
+            // 9. Import JSON Database Backup
+            importBtn.addEventListener("click", () => {
+                if (importFile.files.length === 0) {
+                    window.showToast("Please choose a JSON backup file first.", "danger");
+                    return;
+                }
+
+                const file = importFile.files[0];
+                const reader = new FileReader();
+
+                reader.onload = (e) => {
+                    try {
+                        const parsedData = JSON.parse(e.target.result);
+                        const success = db.importData(parsedData);
+                        
+                        if (success) {
+                            window.showToast("Database restored successfully! Reloading system...", "success");
+                            setTimeout(() => window.location.reload(), 1200);
+                        } else {
+                            window.showToast("Invalid backup file schema structure.", "danger");
+                        }
+                    } catch (err) {
+                        window.showToast("Failed to parse JSON file.", "danger");
+                    }
+                };
+
+                reader.readAsText(file);
+            });
+        });
+    </script>
+</body>
+</html>
