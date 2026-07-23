@@ -75,6 +75,7 @@ function injectLayout(pageName, isLoggedIn, roomNo, activeAdminUser) {
             <a href="menu.html" class="nav-item ${pageName === 'menu.html' ? 'active' : ''}"><i class="fa-solid fa-utensils"></i><span>Daily Menu</span></a>
             <a href="bills.html" class="nav-item ${pageName === 'bills.html' ? 'active' : ''}"><i class="fa-solid fa-file-invoice-dollar"></i><span>Bills & Expenses</span></a>
             <a href="payments.html" class="nav-item ${pageName === 'payments.html' ? 'active' : ''}"><i class="fa-solid fa-hand-holding-dollar"></i><span>Payments</span></a>
+            <a href="advance.html" class="nav-item ${pageName === 'advance.html' ? 'active' : ''}"><i class="fa-solid fa-piggy-bank"></i><span>Advance Payment</span></a>
             <a href="reports.html" class="nav-item ${pageName === 'reports.html' ? 'active' : ''}"><i class="fa-solid fa-chart-pie"></i><span>Monthly Reports</span></a>
             <a href="settings.html" class="nav-item ${pageName === 'settings.html' ? 'active' : ''}"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
             <a href="index.html" class="nav-item"><i class="fa-solid fa-globe"></i><span>Public Page</span></a>

@@ -170,6 +170,10 @@ const db = {
             localStorage.setItem("mess_initialized", "true");
         }
 
+        if (!localStorage.getItem("mess_advances")) {
+            localStorage.setItem("mess_advances", JSON.stringify([]));
+        }
+
         const settings = JSON.parse(localStorage.getItem("mess_settings") || "{}");
         
         if (settings.tursoConfig && settings.tursoConfig.url && settings.tursoConfig.token) {
@@ -315,6 +319,7 @@ const db = {
                     if (cloudData.attendance) localStorage.setItem("mess_attendance", JSON.stringify(cloudData.attendance));
                     if (cloudData.rules) localStorage.setItem("mess_rules", JSON.stringify(cloudData.rules));
                     localStorage.setItem("mess_closed_months", JSON.stringify(cloudData.closedMonths || {}));
+                    localStorage.setItem("mess_advances", JSON.stringify(cloudData.advances || []));
                     document.dispatchEvent(new CustomEvent("db-updated"));
                 } else {
                     await this.syncToTurso();
@@ -393,6 +398,7 @@ const db = {
                     if (cloudData.attendance) localStorage.setItem("mess_attendance", JSON.stringify(cloudData.attendance));
                     if (cloudData.rules) localStorage.setItem("mess_rules", JSON.stringify(cloudData.rules));
                     localStorage.setItem("mess_closed_months", JSON.stringify(cloudData.closedMonths || {}));
+                    localStorage.setItem("mess_advances", JSON.stringify(cloudData.advances || []));
                 } else {
                     await this.syncToSupabase();
                 }
@@ -417,6 +423,7 @@ const db = {
                             if (cloudData.attendance) localStorage.setItem("mess_attendance", JSON.stringify(cloudData.attendance));
                             if (cloudData.rules) localStorage.setItem("mess_rules", JSON.stringify(cloudData.rules));
                             localStorage.setItem("mess_closed_months", JSON.stringify(cloudData.closedMonths || {}));
+                            localStorage.setItem("mess_advances", JSON.stringify(cloudData.advances || []));
 
                             document.dispatchEvent(new CustomEvent("db-updated"));
                         }
@@ -538,6 +545,7 @@ const db = {
         localStorage.removeItem("mess_attendance");
         localStorage.removeItem("mess_rules");
         localStorage.removeItem("mess_closed_months");
+        localStorage.removeItem("mess_advances");
         localStorage.removeItem("mess_initialized");
         localStorage.removeItem("mess_version");
         localStorage.removeItem("mess_selected_month");
@@ -555,6 +563,7 @@ const db = {
             localStorage.setItem("mess_attendance", JSON.stringify(data.attendance || {}));
             localStorage.setItem("mess_rules", JSON.stringify(data.rules || DEFAULT_RULES));
             localStorage.setItem("mess_closed_months", JSON.stringify(data.closedMonths || {}));
+            localStorage.setItem("mess_advances", JSON.stringify(data.advances || []));
             localStorage.setItem("mess_initialized", "true");
             localStorage.setItem("mess_version", DB_VERSION);
             
@@ -574,7 +583,8 @@ const db = {
             menu: this.getMenu(),
             attendance: this.getAttendance(),
             rules: this.getRules(),
-            closedMonths: this.getClosedMonths()
+            closedMonths: this.getClosedMonths(),
+            advances: this.getAdvances()
         };
     },
 
@@ -687,6 +697,15 @@ const db = {
 
         const overallCostPerMeal = totalMealsEatenInMonth > 0 ? (totalFoodExpenses / totalMealsEatenInMonth) : 0;
 
+        const allAdvances = this.getAdvances();
+        const memberAdvancesMap = {};
+        allAdvances.forEach(adv => {
+            if (adv && adv.memberId && adv.date >= monthRange.startDate && adv.date <= monthRange.endDate) {
+                const amount = parseFloat(adv.amount || 0);
+                memberAdvancesMap[adv.memberId] = (memberAdvancesMap[adv.memberId] || 0) + amount;
+            }
+        });
+
         let paidMembers = 0;
         let pendingMembers = 0;
         let amountCollected = 0;
@@ -698,7 +717,7 @@ const db = {
             s.grossShareAmount = Math.round((s.foodShare + s.fixedShare) * 100) / 100;
 
             const payInfo = payments[m.id] || {};
-            const advancePaid = parseFloat(payInfo.advance || 0);
+            const advancePaid = (memberAdvancesMap[m.id] || 0) + parseFloat(payInfo.advance || 0);
             s.advancePaid = advancePaid;
 
             s.netShareAmount = Math.max(0, Math.round((s.grossShareAmount - advancePaid) * 100) / 100);
@@ -751,6 +770,17 @@ const db = {
             payments,
             memberShares
         };
+    },
+
+    getAdvances() {
+        this.init();
+        const res = JSON.parse(localStorage.getItem("mess_advances"));
+        return Array.isArray(res) ? res : [];
+    },
+
+    saveAdvances(advances) {
+        localStorage.setItem("mess_advances", JSON.stringify(advances));
+        this.syncAll();
     },
 
     downloadCSVReport(targetMonth) {
