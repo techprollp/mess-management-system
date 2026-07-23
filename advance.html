@@ -122,8 +122,8 @@
 
     <!-- Printable Official Advance Payment Receipt Modal -->
     <div id="receipt-modal" class="modal-overlay">
-        <div class="modal-container" style="max-width: 550px; background: #ffffff; color: #1e293b; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);">
-            <div id="printable-receipt" style="padding: 30px; font-family: system-ui, -apple-system, sans-serif;">
+        <div class="modal-container" style="max-width: 550px; background: #ffffff; color: #1e293b; border-radius: 16px; overflow-y: auto; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);">
+            <div id="printable-receipt" style="padding: 30px 30px 10px 30px; font-family: system-ui, -apple-system, sans-serif;">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 20px;">
                     <div>
                         <h2 style="font-size: 20px; font-weight: 800; color: #1e3a8a; margin: 0; text-transform: uppercase;">Room 803 Mess Portal</h2>
@@ -174,7 +174,7 @@
                     <p style="margin: 4px 0 0 0;">Room 803 Mess Administration &bull; Universal Multi-Cloud Ledger Sync</p>
                 </div>
             </div>
-            <div class="modal-footer" style="background: #f8fafc; border-top: 1px solid #e2e8f0; justify-content: flex-end; gap: 10px;">
+            <div style="background: #ffffff; padding: 0px 30px 30px 30px; display: flex; justify-content: flex-end; gap: 10px; border-top: 1px dashed #e2e8f0; margin-top: 10px; padding-top: 20px;">
                 <button class="btn btn-outline" id="close-receipt-btn">Close</button>
                 <button class="btn btn-primary" id="print-receipt-btn"><i class="fa-solid fa-print"></i> Print Receipt</button>
             </div>

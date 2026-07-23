@@ -61,7 +61,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     printReceiptBtn.addEventListener("click", () => {
-        window.print();
+        const printContent = document.getElementById("printable-receipt").innerHTML;
+        const printWindow = window.open("", "_blank", "width=700,height=700");
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Print Advance Receipt - Room 803 Mess</title>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                    <style>
+                        body { font-family: system-ui, -apple-system, sans-serif; padding: 20px; background: #ffffff; color: #1e293b; }
+                    </style>
+                </head>
+                <body onload="window.print(); window.close();">
+                    ${printContent}
+                </body>
+            </html>
+        `);
+        printWindow.document.close();
     });
 
     // Populate members in select dropdown

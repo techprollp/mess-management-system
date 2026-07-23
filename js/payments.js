@@ -307,18 +307,32 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("receipt-date").textContent = payInfo.payDate || new Date().toISOString().split('T')[0];
         document.getElementById("receipt-month").textContent = `Period: ${range.label}`;
 
-        document.getElementById("receipt-desc-title").textContent = `Monthly Mess Share (${share.mealsEaten} meals)`;
-        document.getElementById("receipt-desc-amount").textContent = `${currency} ${paidAmount.toFixed(2)}`;
+        const grossShare = share.grossShareAmount || 0;
+        const netShare = share.netShareAmount || 0;
+        const dueBalance = isPaid ? 0 : netShare;
+        const excessAmount = Math.max(0, (advancePaid + paidAmount) - grossShare);
 
-        const advanceRow = document.getElementById("receipt-advance-row");
-        if (advancePaid > 0) {
-            advanceRow.style.display = "table-row";
-            document.getElementById("receipt-advance-amount").textContent = `${currency} ${advancePaid.toFixed(2)}`;
+        document.getElementById("receipt-gross-share").textContent = `${currency} ${grossShare.toFixed(2)}`;
+        document.getElementById("receipt-advance-deducted").textContent = `-${currency} ${advancePaid.toFixed(2)}`;
+        document.getElementById("receipt-net-share").textContent = `${currency} ${netShare.toFixed(2)}`;
+        document.getElementById("receipt-total-paid").textContent = `${currency} ${paidAmount.toFixed(2)}`;
+        document.getElementById("receipt-due-balance").textContent = `${currency} ${dueBalance.toFixed(2)}`;
+
+        const excessRow = document.getElementById("receipt-excess-row");
+        if (excessAmount > 0) {
+            excessRow.style.display = "table-row";
+            document.getElementById("receipt-excess-amount").textContent = `${currency} ${excessAmount.toFixed(2)}`;
         } else {
-            advanceRow.style.display = "none";
+            excessRow.style.display = "none";
         }
 
-        document.getElementById("receipt-total-amount").textContent = `${currency} ${totalReceiptAmount.toFixed(2)}`;
+        const statusEl = document.getElementById("receipt-status-text");
+        if (statusEl) {
+            statusEl.innerHTML = isPaid 
+                ? `<span style="color:#166534;"><i class="fa-solid fa-circle-check"></i> Status: Verified Paid</span>`
+                : `<span style="color:#ef4444;"><i class="fa-solid fa-circle-xmark"></i> Status: Unpaid / Pending</span>`;
+        }
+
         receiptModal.classList.add("active");
     }
 
