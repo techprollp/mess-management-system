@@ -1,4 +1,4 @@
-// Payments.js - Payment ledger management script with Digital Receipt Generation (v23.0)
+// Payments.js - Payment ledger management script with Digital Receipt Generation (v30.0)
 
 document.addEventListener("DOMContentLoaded", () => {
     const desktopTbody = document.getElementById("payments-table-body");
@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const settings = db.getSettings();
     const currency = settings.currency || "AED";
+
+    const colors = ['blue','green','orange','red','purple','pink','teal'];
 
     document.addEventListener("db-updated", () => {
         renderLedger();
@@ -56,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        filtered.forEach(m => {
+        filtered.forEach((m, index) => {
             const payInfo = payments[m.id] || {};
             const isPaid = payInfo ? payInfo.paid : false;
             const payDate = payInfo && payInfo.payDate ? payInfo.payDate : "--";
@@ -82,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td><strong style="color: var(--primary-light);">${currency} ${share.netShareAmount.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></td>
                 <td>
                     <span class="badge ${isPaid ? 'badge-success' : 'badge-danger'}">
-                        <i class="fa-solid ${isPaid ? 'fa-circle-check' : 'fa-clock'}"></i>
+                        <i class="fa-solid ${isPaid ? 'fa-check' : 'fa-clock'}"></i>
                         ${isPaid ? 'Paid' : 'Pending'}
                     </span>
                 </td>
@@ -94,67 +96,45 @@ document.addEventListener("DOMContentLoaded", () => {
                             <button class="btn btn-outline btn-sm toggle-status-btn" data-id="${m.id}" data-action="unpaid"><i class="fa-solid fa-xmark"></i> Mark Unpaid</button>
                         ` : `
                             <button class="btn btn-primary btn-sm toggle-status-btn" data-id="${m.id}" data-action="paid"><i class="fa-solid fa-check"></i> Record Paid</button>
+                            <button class="btn btn-secondary btn-sm send-reminder-btn" style="color: #34C759; border-color: #34C759;" data-id="${m.id}"><i class="fa-brands fa-whatsapp"></i></button>
                         `}
-                        <button class="btn btn-outline btn-sm edit-payment-btn" data-id="${m.id}"><i class="fa-solid fa-pen-to-square"></i> Edit / Advance</button>
+                        <button class="btn btn-outline btn-sm edit-payment-btn" data-id="${m.id}"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
                         <button class="btn btn-secondary btn-sm view-receipt-btn" data-id="${m.id}"><i class="fa-solid fa-receipt"></i> Receipt</button>
-                        ${!isPaid ? `
-                            <button class="btn btn-secondary btn-sm send-reminder-btn" style="color: #25d366; border-color: #25d366;" data-id="${m.id}"><i class="fa-brands fa-whatsapp"></i></button>
-                        ` : ''}
                     </div>
                 </td>
             `;
             desktopTbody.appendChild(tr);
 
             // Mobile Card
+            const color = colors[index % colors.length];
+            const initial = m.name.charAt(0).toUpperCase();
+
             const mobileCard = document.createElement("div");
-            mobileCard.className = "mobile-table-card";
+            mobileCard.className = "contact-card";
             mobileCard.innerHTML = `
-                <div class="card-row">
-                    <span class="row-label">Member</span>
-                    <span class="row-value"><strong>${m.name}</strong></span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Status</span>
-                    <span class="row-value">
+                <div class="contact-card-inner">
+                    <div class="avatar ${color}">${initial}</div>
+                    <div class="contact-info">
+                        <h4>${m.name}</h4>
+                        <p>Net Owed: <strong>${currency} ${share.netShareAmount.toFixed(2)}</strong></p>
+                        <p style="font-size: 11px; color: var(--text-muted);">Gross: ${currency} ${share.grossShareAmount.toFixed(2)} | Advance: ${currency} ${share.advancePaid.toFixed(2)}</p>
+                    </div>
+                    <div class="contact-status">
                         <span class="badge ${isPaid ? 'badge-success' : 'badge-danger'}">
+                            <i class="fa-solid ${isPaid ? 'fa-check' : 'fa-clock'}"></i>
                             ${isPaid ? 'Paid' : 'Pending'}
                         </span>
-                    </span>
+                    </div>
                 </div>
-                <div class="card-row">
-                    <span class="row-label">Meals Consumed</span>
-                    <span class="row-value"><i class="fa-solid fa-utensils"></i> ${share.mealsEaten} meals</span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Gross Share</span>
-                    <span class="row-value">${currency} ${share.grossShareAmount.toFixed(2)}</span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Advance Paid</span>
-                    <span class="row-value">${advanceMarkup}</span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Net Owed Share</span>
-                    <span class="row-value"><strong style="color:var(--primary-light);">${currency} ${share.netShareAmount.toFixed(2)}</strong></span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Paid Date</span>
-                    <span class="row-value">${payDate}</span>
-                </div>
-                <div class="card-row" style="margin-top: 8px; border-top: 1px solid var(--border-color); padding-top: 8px;">
-                    <span class="row-label">Actions</span>
-                    <span class="row-value" style="display:flex; justify-content:flex-end; gap:6px;">
-                        ${isPaid ? `
-                            <button class="btn btn-outline btn-sm toggle-status-btn" style="width:auto; margin:0;" data-id="${m.id}" data-action="unpaid">Mark Unpaid</button>
-                        ` : `
-                            <button class="btn btn-primary btn-sm toggle-status-btn" style="width:auto; margin:0;" data-id="${m.id}" data-action="paid">Record Paid</button>
-                        `}
-                        <button class="btn btn-outline btn-sm edit-payment-btn" style="width:auto; margin:0;" data-id="${m.id}"><i class="fa-solid fa-pen"></i></button>
-                        <button class="btn btn-secondary btn-sm view-receipt-btn" style="width:auto; margin:0;" data-id="${m.id}"><i class="fa-solid fa-receipt"></i></button>
-                        ${!isPaid ? `
-                            <button class="btn btn-secondary btn-sm send-reminder-btn" style="width:auto; margin:0; color: #25d366; border-color: #25d366;" data-id="${m.id}"><i class="fa-brands fa-whatsapp"></i></button>
-                        ` : ''}
-                    </span>
+                <div class="contact-actions">
+                    ${isPaid ? `
+                        <button class="btn btn-outline btn-sm toggle-status-btn" data-id="${m.id}" data-action="unpaid">Mark Unpaid</button>
+                    ` : `
+                        <button class="btn btn-primary btn-sm toggle-status-btn" data-id="${m.id}" data-action="paid">Record Paid</button>
+                        <button class="btn btn-secondary btn-sm send-reminder-btn" style="color: #34C759; border-color: #34C759;" data-id="${m.id}"><i class="fa-brands fa-whatsapp"></i></button>
+                    `}
+                    <button class="btn btn-outline btn-sm edit-payment-btn" data-id="${m.id}"><i class="fa-solid fa-pen"></i></button>
+                    <button class="btn btn-secondary btn-sm view-receipt-btn" data-id="${m.id}"><i class="fa-solid fa-receipt"></i></button>
                 </div>
             `;
             mobileList.appendChild(mobileCard);
@@ -290,15 +270,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isPaid && advancePaid > 0) {
             typeBadge.textContent = "Paid & Advance Receipt";
             typeBadge.style.background = "#dcfce7";
-            typeBadge.style.color = "#166534";
+            typeBadge.style.color = "#34C759";
         } else if (advancePaid > 0) {
             typeBadge.textContent = "Advance Paid Receipt";
             typeBadge.style.background = "#dbeafe";
-            typeBadge.style.color = "#1e40af";
+            typeBadge.style.color = "#0071E3";
         } else {
             typeBadge.textContent = isPaid ? "Monthly Paid Receipt" : "Pending Statement";
             typeBadge.style.background = isPaid ? "#dcfce7" : "#fee2e2";
-            typeBadge.style.color = isPaid ? "#166534" : "#991b1b";
+            typeBadge.style.color = isPaid ? "#34C759" : "#FF3B30";
         }
 
         const range = db.getMonthRange(selectedMonth);
@@ -329,8 +309,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const statusEl = document.getElementById("receipt-status-text");
         if (statusEl) {
             statusEl.innerHTML = isPaid 
-                ? `<span style="color:#166534;"><i class="fa-solid fa-circle-check"></i> Status: Verified Paid</span>`
-                : `<span style="color:#ef4444;"><i class="fa-solid fa-circle-xmark"></i> Status: Unpaid / Pending</span>`;
+                ? `<span style="color:#34C759;"><i class="fa-solid fa-circle-check"></i> Status: Verified Paid</span>`
+                : `<span style="color:#FF3B30;"><i class="fa-solid fa-circle-xmark"></i> Status: Unpaid / Pending</span>`;
         }
 
         receiptModal.classList.add("active");
@@ -349,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <title>Print Payment Receipt - Room 803 Mess</title>
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                     <style>
-                        body { font-family: system-ui, -apple-system, sans-serif; padding: 20px; background: #ffffff; color: #1e293b; }
+                        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', system-ui, sans-serif; padding: 20px; background: #ffffff; color: #1e293b; }
                     </style>
                 </head>
                 <body onload="window.print(); window.close();">
@@ -383,6 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
     remindAllBtn.addEventListener("click", () => {
         const selectedMonth = db.getSelectedMonth();
         const stats = db.getStats(selectedMonth);
+        const range = db.getMonthRange(selectedMonth);
         const unpaidMembers = stats.members.filter(m => {
             const payInfo = stats.payments[m.id];
             return !payInfo || !payInfo.paid;
@@ -393,8 +374,19 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        if (confirm(`Send WhatsApp reminder to first pending member (${unpaidMembers[0].name})?`)) {
-            sendReminder(unpaidMembers[0].id);
+        let message = `*Room ${settings.roomNo} Mess Update* 🍽️\n\n`;
+        message += `Pending dues for the period: *${range.shortLabel}*\n\n`;
+        
+        unpaidMembers.forEach(m => {
+            const share = stats.memberShares[m.id] || { netShareAmount: 0 };
+            message += `👤 ${m.name}: *${currency} ${share.netShareAmount.toFixed(2)}*\n`;
+        });
+        
+        message += `\nPlease clear your dues at the earliest. Thank you!`;
+
+        if (confirm(`Generate broadcast message for ${unpaidMembers.length} unpaid members to send to your WhatsApp Group?`)) {
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+            window.open(url, "_blank");
         }
     });
 

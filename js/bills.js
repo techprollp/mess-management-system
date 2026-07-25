@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileList = document.getElementById("bills-mobile-list");
     
     // Add Modal Elements
+    const recalcBtn = document.getElementById("recalc-btn");
     const openModalBtn = document.getElementById("open-add-bill-btn");
     const closeModalBtn = document.getElementById("close-bill-modal-btn");
     const cancelModalBtn = document.getElementById("cancel-bill-btn");
@@ -162,40 +163,35 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             desktopTbody.appendChild(tr);
 
-            // Mobile Card
+            // Mobile Card (Apple Wallet Style)
+            const getCategoryEmoji = (cat) => {
+                const c = cat.toLowerCase();
+                if(c.includes('food')) return '🍚';
+                if(c.includes('grocer')) return '🛒';
+                if(c.includes('meat')) return '🥩';
+                if(c.includes('veg')) return '🥦';
+                if(c.includes('gas') || c.includes('util') || c.includes('elect')) return '⛽';
+                if(c.includes('clean') || c.includes('main')) return '🧹';
+                if(c.includes('rent')) return '🏠';
+                if(c.includes('internet')) return '🌐';
+                return '📦';
+            };
+            const emoji = getCategoryEmoji(bill.category);
+
             const mobileCard = document.createElement("div");
-            mobileCard.className = "mobile-table-card";
+            mobileCard.className = "wallet-item";
             mobileCard.innerHTML = `
-                <div class="card-row">
-                    <span class="row-label">Item</span>
-                    <span class="row-value"><strong>${bill.title}</strong></span>
+                <div class="wallet-icon">${emoji}</div>
+                <div class="wallet-details">
+                    <div class="wallet-title">${bill.title}</div>
+                    <div class="wallet-sub">${bill.date} • ${bill.category} • ${isAllTargeted ? 'All Members' : targetedCount + ' Members'}</div>
                 </div>
-                <div class="card-row">
-                    <span class="row-label">Amount</span>
-                    <span class="row-value"><strong>${currency} ${parseFloat(bill.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Category</span>
-                    <span class="row-value"><span class="badge badge-warning" style="background-color:rgba(245,158,11,0.1); color:var(--warning);">${bill.category}</span></span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Applied To</span>
-                    <span class="row-value">${targetBadge}</span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Date</span>
-                    <span class="row-value">${bill.date}</span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Invoice</span>
-                    <span class="row-value">${invoiceMarkup}</span>
-                </div>
-                <div class="card-row" style="margin-top: 8px; border-top: 1px solid var(--border-color); padding-top: 8px;">
-                    <span class="row-label">Actions</span>
-                    <span class="row-value" style="display:flex; justify-content:flex-end; gap:6px;">
-                        <button class="btn btn-outline btn-sm edit-bill-btn" style="width:auto; margin:0;" data-id="${bill.id}"><i class="fa-solid fa-pen"></i> Edit</button>
-                        <button class="btn btn-danger btn-sm delete-bill-btn" style="width:auto; margin:0;" data-id="${bill.id}"><i class="fa-solid fa-trash"></i> Delete</button>
-                    </span>
+                <div class="wallet-amount-col">
+                    <div class="wallet-amount" style="color:var(--text-dark);">${currency} ${parseFloat(bill.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
+                    <div style="display:flex; justify-content:flex-end; gap:6px; margin-top:6px;">
+                        <button class="btn btn-outline btn-sm edit-bill-btn" style="padding:2px 8px; font-size:11px; border-radius:10px;" data-id="${bill.id}"><i class="fa-solid fa-pen"></i></button>
+                        <button class="btn btn-outline btn-sm delete-bill-btn" style="padding:2px 8px; font-size:11px; border-radius:10px; color:var(--danger); border-color:var(--danger);" data-id="${bill.id}"><i class="fa-solid fa-trash"></i></button>
+                    </div>
                 </div>
             `;
             mobileList.appendChild(mobileCard);
@@ -275,6 +271,22 @@ document.addEventListener("DOMContentLoaded", () => {
     function closeAddModal() {
         addBillModal.classList.remove("active");
         addBillForm.reset();
+    }
+
+    if (recalcBtn) {
+        recalcBtn.addEventListener("click", () => {
+            const btnIcon = recalcBtn.querySelector("i");
+            btnIcon.classList.add("fa-spin");
+            
+            // Force recalculation by getting stats, syncing, and dispatching event
+            const selectedMonth = db.getSelectedMonth();
+            db.getStats(selectedMonth); // This runs all the computations
+            db.syncAll().then(() => {
+                document.dispatchEvent(new CustomEvent("db-updated"));
+                window.showToast("Month successfully re-calculated", "success");
+                btnIcon.classList.remove("fa-spin");
+            });
+        });
     }
 
     openModalBtn.addEventListener("click", openAddModal);

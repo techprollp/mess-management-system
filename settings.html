@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mess Settings - Room 803 Mess</title>
     <!-- CSS Dependencies -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/style.css?v=30.0">
+    <link rel="stylesheet" href="css/responsive.css?v=30.0">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -18,8 +18,8 @@
         <!-- Header Bar -->
         <div class="header-bar">
             <div class="page-title">
-                <h2>System Settings</h2>
-                <p>Configure room metadata, currency, edit passwords, manage mess rules, and control Supabase cloud sync.</p>
+                <h2 style="font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">System Settings</h2>
+                <p style="color: var(--text-secondary); font-size: 15px;">Configure room metadata, currency, edit passwords, manage mess rules, and control Supabase cloud sync.</p>
             </div>
         </div>
 
@@ -28,69 +28,75 @@
             <!-- Left Column: General, Security, Rules & Supabase Sync -->
             <div style="display:flex; flex-direction:column; gap:24px;">
                 <!-- General Settings Card -->
-                <div class="card">
-                    <div class="card-title">
-                        <span><i class="fa-solid fa-sliders"></i> General Configuration</span>
+                <div class="card animate-in" style="animation-delay: 0.1s; border-radius: 24px; border: none; background: var(--bg-card); box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <div class="card-title" style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px;">
+                        <span style="font-weight: 600;"><i class="fa-solid fa-sliders" style="color: #0071E3;"></i> General Configuration</span>
                     </div>
                     <form id="general-settings-form">
-                        <div class="form-group">
-                            <label for="settings-room">Room Number</label>
-                            <input type="text" id="settings-room" class="form-control" required>
+                        <div class="grouped-list">
+                            <div class="grouped-list-item form-group" style="border: none; padding: 0; margin-bottom: 16px;">
+                                <label for="settings-room" style="font-weight: 500; color: var(--text-main);">Room Number</label>
+                                <input type="text" id="settings-room" class="form-control" required style="border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); margin-top: 6px;">
+                            </div>
+                            <div class="grouped-list-item form-group" style="border: none; padding: 0; margin-bottom: 20px;">
+                                <label for="settings-currency" style="font-weight: 500; color: var(--text-main);">System Currency</label>
+                                <input type="text" id="settings-currency" class="form-control" placeholder="e.g. AED, USD, INR" required style="border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); margin-top: 6px;">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="settings-currency">System Currency</label>
-                            <input type="text" id="settings-currency" class="form-control" placeholder="e.g. AED, USD, INR" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fa-solid fa-floppy-disk"></i> Save Configurations</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 12px; background-color: #0071E3; font-weight: 600;"><i class="fa-solid fa-floppy-disk"></i> Save Configurations</button>
                     </form>
                 </div>
 
                 <!-- Supabase Cloud Sync Card -->
-                <div class="card" style="border: 1px solid var(--primary-light); background: linear-gradient(180deg, var(--bg-card), rgba(59,130,246,0.02));">
-                    <div class="card-title">
-                        <span><i class="fa-solid fa-bolt" style="color:var(--success);"></i> Supabase Real-Time Cloud Sync</span>
-                        <span id="sync-status-badge" class="badge badge-success">Connected</span>
+                <div class="card animate-in" style="animation-delay: 0.2s; border-radius: 24px; border: none; background: var(--bg-card); box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <div class="card-title" style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600;"><i class="fa-solid fa-bolt" style="color: #34C759;"></i> Supabase Sync</span>
+                        <span id="sync-status-badge" class="badge" style="background-color: #34C759; color: white; border-radius: 12px; padding: 4px 10px; font-size: 12px;">Connected</span>
                     </div>
-                    <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;">
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.5;">
                         Configure a free Supabase PostgreSQL Database to synchronize Room 803 Mess data automatically across all laptops and mobiles in real time.
                     </p>
                     
                     <form id="supabase-sync-form">
-                        <div class="form-group">
-                            <label for="sb-url">Project URL *</label>
-                            <input type="text" id="sb-url" class="form-control" placeholder="https://xyz.supabase.co" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="sb-key">Anon / Public Key *</label>
-                            <input type="password" id="sb-key" class="form-control" placeholder="sb_publishable_..." required>
+                        <div class="grouped-list">
+                            <div class="grouped-list-item form-group" style="border: none; padding: 0; margin-bottom: 16px;">
+                                <label for="sb-url" style="font-weight: 500; color: var(--text-main);">Project URL *</label>
+                                <input type="text" id="sb-url" class="form-control" placeholder="https://xyz.supabase.co" required style="border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); margin-top: 6px;">
+                            </div>
+                            <div class="grouped-list-item form-group" style="border: none; padding: 0; margin-bottom: 20px;">
+                                <label for="sb-key" style="font-weight: 500; color: var(--text-main);">Anon / Public Key *</label>
+                                <input type="password" id="sb-key" class="form-control" placeholder="sb_publishable_..." required style="border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); margin-top: 6px;">
+                            </div>
                         </div>
                         
-                        <div style="display:flex; gap:12px; margin-top: 20px;">
-                            <button type="button" class="btn btn-danger" id="disable-sync-btn" style="flex:1;"><i class="fa-solid fa-power-off"></i> Turn Off Sync</button>
-                            <button type="submit" class="btn btn-primary" id="enable-sync-btn" style="flex:2;"><i class="fa-solid fa-cloud-arrow-up"></i> Save & Reconnect</button>
+                        <div style="display:flex; gap:12px; margin-top: 10px;">
+                            <button type="button" class="btn" id="disable-sync-btn" style="flex:1; background-color: #FF3B30; color: white; border-radius: 12px; font-weight: 600;"><i class="fa-solid fa-power-off"></i> Turn Off Sync</button>
+                            <button type="submit" class="btn btn-primary" id="enable-sync-btn" style="flex:2; background-color: #0071E3; border-radius: 12px; font-weight: 600;"><i class="fa-solid fa-cloud-arrow-up"></i> Save & Reconnect</button>
                         </div>
                     </form>
                 </div>
 
                 <!-- Admin Security Credentials -->
-                <div class="card">
-                    <div class="card-title">
-                        <span><i class="fa-solid fa-lock"></i> Change Admin Password</span>
+                <div class="card animate-in" style="animation-delay: 0.3s; border-radius: 24px; border: none; background: var(--bg-card); box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <div class="card-title" style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px;">
+                        <span style="font-weight: 600;"><i class="fa-solid fa-lock" style="color: #FF9500;"></i> Change Admin Password</span>
                     </div>
                     <form id="change-pw-form">
-                        <div class="form-group">
-                            <label for="old-pw">Current Password</label>
-                            <input type="password" id="old-pw" class="form-control" required>
+                        <div class="grouped-list">
+                            <div class="grouped-list-item form-group" style="border: none; padding: 0; margin-bottom: 16px;">
+                                <label for="old-pw" style="font-weight: 500; color: var(--text-main);">Current Password</label>
+                                <input type="password" id="old-pw" class="form-control" required style="border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); margin-top: 6px;">
+                            </div>
+                            <div class="grouped-list-item form-group" style="border: none; padding: 0; margin-bottom: 16px;">
+                                <label for="new-pw" style="font-weight: 500; color: var(--text-main);">New Password</label>
+                                <input type="password" id="new-pw" class="form-control" required style="border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); margin-top: 6px;">
+                            </div>
+                            <div class="grouped-list-item form-group" style="border: none; padding: 0; margin-bottom: 20px;">
+                                <label for="confirm-pw" style="font-weight: 500; color: var(--text-main);">Confirm New Password</label>
+                                <input type="password" id="confirm-pw" class="form-control" required style="border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); margin-top: 6px;">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="new-pw">New Password</label>
-                            <input type="password" id="new-pw" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirm-pw">Confirm New Password</label>
-                            <input type="password" id="confirm-pw" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-outline" style="width: 100%;"><i class="fa-solid fa-key"></i> Update Password</button>
+                        <button type="submit" class="btn btn-outline" style="width: 100%; border-radius: 12px; font-weight: 600; color: #0071E3; border-color: #0071E3;"><i class="fa-solid fa-key"></i> Update Password</button>
                     </form>
                 </div>
             </div>
@@ -98,44 +104,44 @@
             <!-- Right Column: Room Mess Rules & Database Backup -->
             <div style="display:flex; flex-direction:column; gap:24px;">
                 <!-- Room Mess Rules Manager Card -->
-                <div class="card">
-                    <div class="card-title">
-                        <span><i class="fa-solid fa-list-check"></i> Manage Room Mess Rules</span>
+                <div class="card animate-in" style="animation-delay: 0.15s; border-radius: 24px; border: none; background: var(--bg-card); box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <div class="card-title" style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px;">
+                        <span style="font-weight: 600;"><i class="fa-solid fa-list-check" style="color: #0071E3;"></i> Manage Room Mess Rules</span>
                     </div>
-                    <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;">
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.5;">
                         Rules added here are automatically displayed on the public Home page (`index.html`) for all roommates to see.
                     </p>
 
                     <!-- Form to add rule -->
-                    <form id="add-rule-form" style="display:flex; gap:8px; margin-bottom: 16px;">
-                        <input type="text" id="new-rule-input" class="form-control" placeholder="e.g. No noise after 11 PM" required style="flex:1;">
-                        <button type="submit" class="btn btn-primary btn-sm" style="white-space:nowrap;"><i class="fa-solid fa-plus"></i> Add Rule</button>
+                    <form id="add-rule-form" style="display:flex; gap:8px; margin-bottom: 20px;">
+                        <input type="text" id="new-rule-input" class="form-control" placeholder="e.g. No noise after 11 PM" required style="flex:1; border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color);">
+                        <button type="submit" class="btn btn-primary" style="white-space:nowrap; border-radius: 12px; background-color: #0071E3; font-weight: 500; padding: 0 16px;"><i class="fa-solid fa-plus"></i> Add Rule</button>
                     </form>
 
                     <!-- Rules List -->
-                    <div id="rules-list-container" class="quick-list">
+                    <div id="rules-list-container" class="grouped-list quick-list" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
                         <!-- Loaded dynamically -->
                     </div>
                 </div>
 
                 <!-- Backup & Restore -->
-                <div class="card">
-                    <div class="card-title">
-                        <span><i class="fa-solid fa-database"></i> Database Backup & Restore</span>
+                <div class="card animate-in" style="animation-delay: 0.25s; border-radius: 24px; border: none; background: var(--bg-card); box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <div class="card-title" style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px;">
+                        <span style="font-weight: 600;"><i class="fa-solid fa-database" style="color: #5856D6;"></i> Database Backup & Restore</span>
                     </div>
                     
                     <div style="margin-bottom: 24px;">
-                        <h4 style="font-size:14px; font-weight:700; margin-bottom:8px;"><i class="fa-solid fa-file-export"></i> Export Database</h4>
-                        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Download all members, invoices, payments, and attendance logs as a JSON file to keep an offline backup.</p>
-                        <button class="btn btn-outline" id="export-db-btn" style="width:100%;"><i class="fa-solid fa-cloud-arrow-down"></i> Export JSON Backup</button>
+                        <h4 style="font-size:15px; font-weight:600; margin-bottom:8px; color: var(--text-main);"><i class="fa-solid fa-file-export"></i> Export Database</h4>
+                        <p style="font-size:13px; color: var(--text-secondary); margin-bottom:12px; line-height: 1.5;">Download all members, invoices, payments, and attendance logs as a JSON file to keep an offline backup.</p>
+                        <button class="btn btn-outline" id="export-db-btn" style="width:100%; border-radius: 12px; font-weight: 500; color: #5856D6; border-color: #5856D6;"><i class="fa-solid fa-cloud-arrow-down"></i> Export JSON Backup</button>
                     </div>
 
                     <div style="border-top:1px solid var(--border-color); padding-top:24px;">
-                        <h4 style="font-size:14px; font-weight:700; margin-bottom:8px;"><i class="fa-solid fa-file-import"></i> Restore from Backup</h4>
-                        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Restore all system data from a previously downloaded JSON backup file. WARNING: This overrides all current records.</p>
+                        <h4 style="font-size:15px; font-weight:600; margin-bottom:8px; color: var(--text-main);"><i class="fa-solid fa-file-import"></i> Restore from Backup</h4>
+                        <p style="font-size:13px; color: var(--text-secondary); margin-bottom:12px; line-height: 1.5;">Restore all system data from a previously downloaded JSON backup file. <span style="color:#FF3B30; font-weight:500;">WARNING: This overrides all current records.</span></p>
                         <div style="display:flex; gap:12px;">
-                            <input type="file" id="import-db-file" accept=".json" class="form-control" style="padding: 7px 12px; flex: 2;">
-                            <button class="btn btn-primary" id="import-db-btn" style="flex: 1;"><i class="fa-solid fa-cloud-arrow-up"></i> Import</button>
+                            <input type="file" id="import-db-file" accept=".json" class="form-control" style="padding: 7px 12px; flex: 2; border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color);">
+                            <button class="btn btn-primary" id="import-db-btn" style="flex: 1; border-radius: 12px; background-color: #5856D6; font-weight: 500;"><i class="fa-solid fa-cloud-arrow-up"></i> Import</button>
                         </div>
                     </div>
                 </div>
@@ -146,8 +152,8 @@
     </div>
 
     <!-- Script dependencies -->
-    <script src="js/storage.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/storage.js?v=30.0"></script>
+    <script src="js/app.js?v=30.0"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const generalForm = document.getElementById("general-settings-form");
@@ -178,21 +184,26 @@
                 const rules = db.getRules();
 
                 if (rules.length === 0) {
-                    rulesContainer.innerHTML = `<p style="font-size:12px; color:var(--text-muted); padding:8px;">No room mess rules defined yet.</p>`;
+                    rulesContainer.innerHTML = `<p style="font-size:14px; color: var(--text-secondary); padding:16px; text-align:center;">No room mess rules defined yet.</p>`;
                     return;
                 }
 
                 rules.forEach((rule, index) => {
                     const item = document.createElement("div");
-                    item.className = "quick-list-item";
-                    item.style.padding = "8px 12px";
+                    item.className = "quick-list-item grouped-list-item";
+                    item.style.padding = "12px 16px";
+                    item.style.borderBottom = "1px solid var(--border-color)";
+                    item.style.backgroundColor = "transparent";
+                    item.style.display = "flex";
+                    item.style.justifyContent = "space-between";
+                    item.style.alignItems = "center";
                     item.innerHTML = `
                         <div class="quick-item-details" style="flex:1; padding-right:12px;">
-                            <span class="quick-item-title" style="font-size:13px; font-weight:500;">${index + 1}. ${rule}</span>
+                            <span class="quick-item-title" style="font-size:14px; font-weight:500; color: var(--text-main);">${index + 1}. ${rule}</span>
                         </div>
-                        <div style="display:flex; gap:6px;">
-                            <button class="btn btn-outline btn-sm edit-rule-btn" data-index="${index}" style="padding:2px 8px; font-size:11px;"><i class="fa-solid fa-pen"></i></button>
-                            <button class="btn btn-danger btn-sm delete-rule-btn" data-index="${index}" style="padding:2px 8px; font-size:11px;"><i class="fa-solid fa-trash"></i></button>
+                        <div style="display:flex; gap:8px;">
+                            <button class="btn btn-outline edit-rule-btn" data-index="${index}" style="padding:4px 10px; font-size:12px; border-radius: 8px; border-color: #0071E3; color: #0071E3;"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn delete-rule-btn" data-index="${index}" style="padding:4px 10px; font-size:12px; border-radius: 8px; background-color: #FF3B30; color: white;"><i class="fa-solid fa-trash"></i></button>
                         </div>
                     `;
                     rulesContainer.appendChild(item);
@@ -246,12 +257,12 @@
                 document.getElementById("sb-url").value = settings.supabaseConfig.url;
                 document.getElementById("sb-key").value = settings.supabaseConfig.key;
                 
-                syncBadge.textContent = "Enabled (Connected)";
-                syncBadge.className = "badge badge-success";
+                syncBadge.textContent = "Connected";
+                syncBadge.style.backgroundColor = "#34C759";
                 disableSyncBtn.style.display = "block";
             } else {
                 syncBadge.textContent = "Disabled";
-                syncBadge.className = "badge badge-danger";
+                syncBadge.style.backgroundColor = "#86868b";
                 disableSyncBtn.style.display = "none";
             }
 

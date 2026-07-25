@@ -70,7 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (reportBadgeEl) {
             reportBadgeEl.textContent = stats.isClosed ? "Closed & Finalized" : "Active Cycle";
-            reportBadgeEl.className = stats.isClosed ? "badge badge-danger" : "badge badge-success";
+            if (stats.isClosed) {
+                reportBadgeEl.style.backgroundColor = "#FF3B30";
+            } else {
+                reportBadgeEl.style.backgroundColor = "#34C759";
+            }
         }
 
         const closeBtn = document.getElementById("close-month-btn");
@@ -78,9 +82,15 @@ document.addEventListener("DOMContentLoaded", () => {
             if (stats.isClosed) {
                 closeBtn.innerHTML = `<i class="fa-solid fa-lock-open"></i> Unlock Period`;
                 closeBtn.className = "btn btn-outline btn-sm";
+                closeBtn.style.color = "#FF9500";
+                closeBtn.style.borderColor = "#FF9500";
+                closeBtn.style.backgroundColor = "transparent";
             } else {
                 closeBtn.innerHTML = `<i class="fa-solid fa-file-signature"></i> Finalize & Close Month`;
                 closeBtn.className = "btn btn-primary btn-sm";
+                closeBtn.style.backgroundColor = "#0071E3";
+                closeBtn.style.color = "white";
+                closeBtn.style.border = "none";
             }
 
             closeBtn.onclick = async () => {
@@ -108,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         totalExpensesVal.textContent = `${currency} ${stats.totalExpenses.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
         
         // Show Cost per Meal Unit in the KPI card
-        feePerMemberVal.innerHTML = `${currency} ${stats.costPerMeal.toLocaleString(undefined, {minimumFractionDigits: 3})}<br><span style="font-size:10px; font-weight:normal; opacity:0.8;">Per Meal Unit</span>`;
+        feePerMemberVal.innerHTML = `${currency} ${stats.costPerMeal.toLocaleString(undefined, {minimumFractionDigits: 3})}<br><span style="font-size:11px; font-weight:normal; color:#0071E3; opacity:0.8;">Per Meal Unit</span>`;
         
         totalCollectedVal.textContent = `${currency} ${stats.amountCollected.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
         pendingBalanceVal.textContent = `${currency} ${stats.balance.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
@@ -134,16 +144,16 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.amount > 0) {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td><strong>${cat}</strong></td>
-                    <td>${data.count}</td>
-                    <td style="text-align: right;"><strong>${currency} ${data.amount.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></td>
+                    <td style="color: var(--text-main); font-weight: 500;">${cat}</td>
+                    <td style="color: var(--text-secondary);">${data.count}</td>
+                    <td style="text-align: right; color: var(--text-main); font-weight: 600;">${currency} ${data.amount.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
                 `;
                 categoryTbody.appendChild(tr);
             }
         });
 
         if (stats.bills.length === 0) {
-            categoryTbody.innerHTML = `<tr><td colspan="3" class="empty-state" style="padding:10px;"><p>No expenses listed for this month.</p></td></tr>`;
+            categoryTbody.innerHTML = `<tr><td colspan="3" class="empty-state" style="padding:20px; text-align:center; color: var(--text-secondary);"><p>No expenses listed for this month.</p></td></tr>`;
         }
 
         // Detailed Roommates Statement
@@ -157,30 +167,30 @@ document.addEventListener("DOMContentLoaded", () => {
             const payDate = payInfo && payInfo.payDate ? payInfo.payDate : "--";
 
             // Get roommate's share and meals eaten
-            const share = memberShares[member.id] || { mealsEaten: 0, shareAmount: 0 };
-            const amountCleared = isPaid ? (payInfo.amount || share.shareAmount) : 0;
+            const share = memberShares[member.id] || { mealsEaten: 0, netShareAmount: 0 };
+            const amountCleared = isPaid ? (payInfo.amount || share.netShareAmount) : 0;
 
             const tr = document.createElement("tr");
             tr.innerHTML = `
-                <td><strong>${member.name}</strong></td>
+                <td style="color: var(--text-main); font-weight: 500;">${member.name}</td>
                 <td>
-                    ${member.phone}<br>
-                    <span style="font-size:11px; color:var(--text-muted);"><i class="fa-solid fa-utensils"></i> ${share.mealsEaten} meals</span>
+                    <span style="color: var(--text-main);">${member.phone}</span><br>
+                    <span style="font-size:12px; color: var(--text-secondary);"><i class="fa-solid fa-utensils"></i> ${share.mealsEaten} meals</span>
                 </td>
-                <td><strong>${currency} ${share.shareAmount.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></td>
+                <td style="color: var(--text-main); font-weight: 600;">${currency} ${(share.netShareAmount || 0).toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
                 <td>
-                    <span class="badge ${isPaid ? 'badge-success' : 'badge-danger'}">
+                    <span class="badge" style="font-size: 11px; padding: 4px 8px; border-radius: 12px; ${isPaid ? 'background-color: #34C759; color: white;' : 'background-color: #FF3B30; color: white;'}">
                         ${isPaid ? 'Paid' : 'Pending'}
                     </span>
                 </td>
-                <td><strong>${currency} ${amountCleared.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></td>
-                <td>${payDate}</td>
+                <td style="color: ${isPaid ? '#34C759' : '#1d1d1f'}; font-weight: 600;">${currency} ${amountCleared.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                <td style="color: var(--text-secondary); font-size: 13px;">${payDate}</td>
             `;
             memberStatementTbody.appendChild(tr);
         });
 
         if (stats.members.length === 0) {
-            memberStatementTbody.innerHTML = `<tr><td colspan="6" class="empty-state"><p>No active members listed.</p></td></tr>`;
+            memberStatementTbody.innerHTML = `<tr><td colspan="6" class="empty-state" style="padding:20px; text-align:center; color: var(--text-secondary);"><p>No active members listed.</p></td></tr>`;
         }
 
         renderChart(catMap);
@@ -198,7 +208,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const isDarkMode = document.documentElement.classList.contains("dark-mode");
-        const textColor = isDarkMode ? "#94a3b8" : "#64748b";
+        const textColor = isDarkMode ? "#94a3b8" : "#86868b";
+        const gridColor = isDarkMode ? "#223049" : "#e5e5ea";
 
         if (labels.length === 0) {
             labels.push("No Data");
@@ -212,10 +223,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 datasets: [{
                     label: `Expenses (${currency})`,
                     data: data,
-                    backgroundColor: 'rgba(59, 130, 246, 0.85)',
-                    borderColor: 'rgb(59, 130, 246)',
-                    borderRadius: 6,
-                    borderWidth: 1
+                    backgroundColor: '#0071E3', // Apple Primary Blue
+                    borderColor: '#0071E3',
+                    borderRadius: 8, // Apple rounded corners
+                    borderWidth: 0,
+                    barPercentage: 0.6
                 }]
             },
             options: {
@@ -224,16 +236,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 plugins: {
                     legend: {
                         display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        padding: 12,
+                        titleFont: { family: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif', size: 14 },
+                        bodyFont: { family: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif', size: 14 },
+                        cornerRadius: 8
                     }
                 },
                 scales: {
                     x: {
-                        ticks: { color: textColor, font: { family: 'Inter' } },
+                        ticks: { color: textColor, font: { family: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif', size: 12 } },
                         grid: { display: false }
                     },
                     y: {
-                        ticks: { color: textColor, font: { family: 'Inter' } },
-                        grid: { color: isDarkMode ? "#223049" : "#e2e8f0" }
+                        ticks: { color: textColor, font: { family: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif', size: 12 } },
+                        grid: { color: gridColor, drawBorder: false },
+                        border: { display: false }
                     }
                 }
             }

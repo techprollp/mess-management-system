@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const kpiBalance = document.getElementById("kpi-balance");
     const kpiCostPerMeal = document.getElementById("kpi-cost-per-meal");
     const kpiPrevClosing = document.getElementById("kpi-prev-closing");
+    const greetingTitle = document.getElementById("greeting-title");
     
     const duesTbody = document.getElementById("dashboard-dues-tbody");
     const duesMobile = document.getElementById("dashboard-dues-mobile");
@@ -14,7 +15,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let financeChartInstance = null;
     let categoryChartInstance = null;
 
+    const AVATAR_COLORS = ['#0071E3', '#34C759', '#FF9500', '#FF3B30', '#5856D6', '#FF2D55', '#5AC8FA'];
+
+    function getGreeting() {
+        const hour = new Date().getHours();
+        if (hour < 12) return "Good Morning, Admin";
+        if (hour < 18) return "Good Afternoon, Admin";
+        return "Good Evening, Admin";
+    }
+
     function renderDashboard() {
+        if (greetingTitle) {
+            greetingTitle.textContent = getGreeting();
+        }
+
         const selectedMonth = db.getSelectedMonth();
         const stats = db.getStats(selectedMonth);
         const settings = db.getSettings();
@@ -36,15 +50,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (statusBadge && statusDesc && closeBtn) {
             if (stats.isClosed) {
                 statusBadge.textContent = "Closed & Finalized";
-                statusBadge.className = "badge badge-danger";
+                statusBadge.style.backgroundColor = "#FF3B3020";
+                statusBadge.style.color = "#FF3B30";
                 statusDesc.textContent = `Mess accounts for period (${stats.monthRange.shortLabel}) are closed & locked. Expenses start fresh at ${currency} 0 for new cycle.`;
                 closeBtn.innerHTML = `<i class="fa-solid fa-lock-open"></i> Unlock Period`;
                 closeBtn.className = "btn btn-outline btn-sm";
             } else {
                 statusBadge.textContent = `Active Cycle (${stats.monthRange.shortLabel})`;
-                statusBadge.className = "badge badge-success";
+                statusBadge.style.backgroundColor = "#34C75920";
+                statusBadge.style.color = "#34C759";
                 statusDesc.textContent = `Active cycle (10th to 9th). After 9th, close month to finalize accounts; 10th starts new cycle at ${currency} 0.`;
-                closeBtn.innerHTML = `<i class="fa-solid fa-file-signature"></i> Finalize & Close Month`;
+                closeBtn.innerHTML = `<i class="fa-solid fa-file-signature"></i> Finalize Month`;
                 closeBtn.className = "btn btn-primary btn-sm";
             }
 
@@ -99,11 +115,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     label: `Amount (${currency})`,
                     data: [stats.totalExpenses, stats.amountCollected, stats.balance],
                     backgroundColor: [
-                        "rgba(245, 158, 11, 0.8)",  // Warning/Amber
-                        "rgba(16, 185, 129, 0.8)",  // Success/Green
-                        "rgba(239, 68, 68, 0.8)"    // Danger/Red
+                        "#FF9500",  // Apple Warning/Amber
+                        "#34C759",  // Apple Success/Green
+                        "#FF3B30"   // Apple Danger/Red
                     ],
-                    borderRadius: 6
+                    borderRadius: 8
                 }]
             },
             options: {
@@ -148,13 +164,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 datasets: [{
                     data,
                     backgroundColor: [
-                        "#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899"
-                    ]
+                        "#0071E3", "#34C759", "#FF9500", "#FF3B30", "#5856D6", "#FF2D55", "#5AC8FA"
+                    ],
+                    borderWidth: 0
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                cutout: '70%',
                 plugins: {
                     legend: { position: "bottom" }
                 }
@@ -169,56 +187,62 @@ document.addEventListener("DOMContentLoaded", () => {
         const activeMembers = stats.members;
 
         if (activeMembers.length === 0) {
-            duesTbody.innerHTML = `<tr><td colspan="6" class="empty-state"><i class="fa-solid fa-users-slash"></i><p>No active roommates registered yet. Click Members to add roommates.</p></td></tr>`;
-            duesMobile.innerHTML = `<div class="empty-state"><i class="fa-solid fa-users-slash"></i><p>No active roommates registered yet.</p></div>`;
+            duesTbody.innerHTML = `<tr><td colspan="6" class="empty-state" style="text-align: center; padding: 32px;"><i class="fa-solid fa-users-slash" style="font-size: 24px; color: var(--text-muted); margin-bottom: 8px;"></i><p>No active roommates registered yet.</p></td></tr>`;
+            duesMobile.innerHTML = `<div class="empty-state" style="text-align: center; padding: 32px;"><i class="fa-solid fa-users-slash" style="font-size: 24px; color: var(--text-muted); margin-bottom: 8px;"></i><p>No active roommates registered yet.</p></div>`;
             return;
         }
 
-        activeMembers.forEach(m => {
+        activeMembers.forEach((m, idx) => {
             const payInfo = stats.payments[m.id];
             const isPaid = payInfo ? payInfo.paid : false;
             const share = stats.memberShares[m.id] || { shareAmount: 0, applicableBillCount: 0 };
             const amountDisplay = isPaid ? (payInfo.amount || share.shareAmount) : share.shareAmount;
+            
+            const initial = m.name ? m.name.charAt(0).toUpperCase() : '?';
+            const color = AVATAR_COLORS[idx % AVATAR_COLORS.length];
 
             // Desktop Row
             const tr = document.createElement("tr");
             tr.innerHTML = `
-                <td><strong>${m.name}</strong></td>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="avatar" style="width: 32px; height: 32px; border-radius: 50%; background-color: ${color}; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">${initial}</div>
+                        <strong>${m.name}</strong>
+                    </div>
+                </td>
                 <td>${m.phone}</td>
-                <td><span class="badge badge-info" style="font-size:11px;"><i class="fa-solid fa-receipt"></i> ${share.applicableBillCount} invoice(s)</span></td>
+                <td><span class="badge" style="background-color: #0071E315; color: #0071E3;"><i class="fa-solid fa-receipt"></i> ${share.applicableBillCount} invoices</span></td>
                 <td><strong>${currency} ${amountDisplay.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></td>
                 <td>
-                    <span class="badge ${isPaid ? 'badge-success' : 'badge-danger'}">
+                    <span class="badge" style="background-color: ${isPaid ? '#34C75920' : '#FF3B3020'}; color: ${isPaid ? '#34C759' : '#FF3B30'};">
                         ${isPaid ? 'Paid' : 'Pending'}
                     </span>
                 </td>
                 <td style="text-align: right;">
-                    <a href="payments.html" class="btn btn-outline btn-sm"><i class="fa-solid fa-receipt"></i> Manage</a>
+                    <a href="payments.html" class="btn btn-outline btn-sm" style="border-radius: 16px;"><i class="fa-solid fa-receipt"></i> Manage</a>
                 </td>
             `;
             duesTbody.appendChild(tr);
 
-            // Mobile Card
+            // Mobile Card using Apple HIG .contact-card / .wallet-item structure
             const mobileCard = document.createElement("div");
-            mobileCard.className = "mobile-table-card";
+            mobileCard.className = "contact-card";
             mobileCard.innerHTML = `
-                <div class="card-row">
-                    <span class="row-label">Roommate</span>
-                    <span class="row-value"><strong>${m.name}</strong></span>
+                <div class="avatar" style="background-color: ${color}; color: white; font-weight: bold;">${initial}</div>
+                <div class="contact-info">
+                    <h4>${m.name}</h4>
+                    <p style="font-size: 13px;">Owed: ${currency} ${amountDisplay.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
                 </div>
-                <div class="card-row">
-                    <span class="row-label">Owed Share</span>
-                    <span class="row-value"><strong>${currency} ${amountDisplay.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Status</span>
-                    <span class="row-value">
-                        <span class="badge ${isPaid ? 'badge-success' : 'badge-danger'}">
-                            ${isPaid ? 'Paid' : 'Pending'}
-                        </span>
+                <div class="contact-actions" style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                    <span class="badge" style="background-color: ${isPaid ? '#34C75920' : '#FF3B3020'}; color: ${isPaid ? '#34C759' : '#FF3B30'}; font-size: 11px;">
+                        ${isPaid ? 'Paid' : 'Pending'}
                     </span>
                 </div>
             `;
+            // Add click listener to mobile card to jump to payments
+            mobileCard.onclick = () => {
+                window.location.href = "payments.html";
+            };
             duesMobile.appendChild(mobileCard);
         });
     }
@@ -226,12 +250,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const checkResponsive = () => {
         if (window.innerWidth <= 768) {
             duesMobile.style.display = "block";
+            duesTbody.parentElement.parentElement.style.display = "none";
         } else {
             duesMobile.style.display = "none";
+            duesTbody.parentElement.parentElement.style.display = "block";
         }
     };
     window.addEventListener("resize", checkResponsive);
-    checkResponsive();
+    // Initial call is handled after DOM load, but let's call it just in case
+    setTimeout(checkResponsive, 100);
 
     // Event listeners for month selector & DB updates
     document.addEventListener("month-changed", () => {

@@ -40,7 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        activeMembers.forEach(m => {
+        const colors = ['#0071E3', '#34C759', '#FF9500', '#FF3B30', '#AF52DE', '#FF2D55'];
+
+        activeMembers.forEach((m, index) => {
             // If no record exists for this date, default to true
             let hasLunch = true;
             let hasDinner = true;
@@ -64,25 +66,34 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             desktopTbody.appendChild(tr);
 
+            const initial = m.name ? m.name.charAt(0).toUpperCase() : '?';
+            const avatarColor = colors[m.id % colors.length] || colors[0];
+            const animationDelay = (index * 0.05).toFixed(2);
+
             // Mobile Card Markup
             const mobileCard = document.createElement("div");
-            mobileCard.className = "mobile-table-card";
+            mobileCard.className = "contact-card animate-in";
+            mobileCard.style.animationDelay = `${animationDelay}s`;
+            mobileCard.style.marginBottom = "12px";
+            mobileCard.style.display = "flex";
+            mobileCard.style.alignItems = "center";
+            mobileCard.style.gap = "12px";
+            mobileCard.style.width = "100%";
             mobileCard.innerHTML = `
-                <div class="card-row">
-                    <span class="row-label">Roommate</span>
-                    <span class="row-value"><strong>${m.name}</strong></span>
+                <div class="avatar" style="background-color: ${avatarColor}; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">${initial}</div>
+                <div style="flex-grow: 1;">
+                    <div style="font-weight: 600; font-size: 16px; color: var(--text-color);">${m.name}</div>
+                    <div style="font-size: 13px; color: var(--text-muted);">${m.phone || 'No phone'}</div>
                 </div>
-                <div class="card-row" style="margin-top: 6px;">
-                    <span class="row-label"><i class="fa-solid fa-sun" style="color:var(--warning);"></i> Lunch</span>
-                    <span class="row-value">
-                        <input type="checkbox" id="mob-lunch-${m.id}" data-id="${m.id}" data-type="lunch" class="lunch-cb form-control" style="width:22px; height:22px;" ${hasLunch ? 'checked' : ''}>
-                    </span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label"><i class="fa-solid fa-moon" style="color:var(--info);"></i> Dinner</span>
-                    <span class="row-value">
-                        <input type="checkbox" id="mob-dinner-${m.id}" data-id="${m.id}" data-type="dinner" class="dinner-cb form-control" style="width:22px; height:22px;" ${hasDinner ? 'checked' : ''}>
-                    </span>
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                    <button type="button" class="btn btn-sm ${hasLunch ? 'btn-success' : 'btn-outline'}" id="mob-lunch-btn-${m.id}" style="border-radius: 20px; font-size:12px; padding: 4px 10px; width: 90px; display:flex; justify-content:space-between; align-items:center; transition: all 0.2s;">
+                        <span>☀️ Lunch</span> <span>${hasLunch ? '●' : '○'}</span>
+                    </button>
+                    <button type="button" class="btn btn-sm ${hasDinner ? 'btn-success' : 'btn-outline'}" id="mob-dinner-btn-${m.id}" style="border-radius: 20px; font-size:12px; padding: 4px 10px; width: 90px; display:flex; justify-content:space-between; align-items:center; transition: all 0.2s;">
+                        <span>🌙 Dinner</span> <span>${hasDinner ? '●' : '○'}</span>
+                    </button>
+                    <input type="checkbox" id="mob-lunch-${m.id}" data-id="${m.id}" data-type="lunch" class="lunch-cb" style="display:none;" ${hasLunch ? 'checked' : ''}>
+                    <input type="checkbox" id="mob-dinner-${m.id}" data-id="${m.id}" data-type="dinner" class="dinner-cb" style="display:none;" ${hasDinner ? 'checked' : ''}>
                 </div>
             `;
             mobileList.appendChild(mobileCard);
@@ -92,11 +103,50 @@ document.addEventListener("DOMContentLoaded", () => {
             const dd = tr.querySelector(`#desk-dinner-${m.id}`);
             const ml = mobileCard.querySelector(`#mob-lunch-${m.id}`);
             const md = mobileCard.querySelector(`#mob-dinner-${m.id}`);
+            const mlBtn = mobileCard.querySelector(`#mob-lunch-btn-${m.id}`);
+            const mdBtn = mobileCard.querySelector(`#mob-dinner-btn-${m.id}`);
 
-            dl.addEventListener("change", (e) => ml.checked = e.target.checked);
-            ml.addEventListener("change", (e) => dl.checked = e.target.checked);
-            dd.addEventListener("change", (e) => md.checked = e.target.checked);
-            md.addEventListener("change", (e) => dd.checked = e.target.checked);
+            const updateMobileBtn = (btn, isChecked, type) => {
+                if (isChecked) {
+                    btn.className = "btn btn-sm btn-success";
+                    btn.innerHTML = `<span>${type === 'lunch' ? '☀️ Lunch' : '🌙 Dinner'}</span> <span>●</span>`;
+                } else {
+                    btn.className = "btn btn-sm btn-outline";
+                    btn.innerHTML = `<span>${type === 'lunch' ? '☀️ Lunch' : '🌙 Dinner'}</span> <span>○</span>`;
+                }
+            };
+
+            mlBtn.addEventListener("click", () => {
+                ml.checked = !ml.checked;
+                dl.checked = ml.checked;
+                updateMobileBtn(mlBtn, ml.checked, 'lunch');
+            });
+
+            mdBtn.addEventListener("click", () => {
+                md.checked = !md.checked;
+                dd.checked = md.checked;
+                updateMobileBtn(mdBtn, md.checked, 'dinner');
+            });
+
+            dl.addEventListener("change", (e) => {
+                ml.checked = e.target.checked;
+                updateMobileBtn(mlBtn, ml.checked, 'lunch');
+            });
+
+            dd.addEventListener("change", (e) => {
+                md.checked = e.target.checked;
+                updateMobileBtn(mdBtn, md.checked, 'dinner');
+            });
+
+            ml.addEventListener("change", (e) => {
+                dl.checked = e.target.checked;
+                updateMobileBtn(mlBtn, ml.checked, 'lunch');
+            });
+
+            md.addEventListener("change", (e) => {
+                dd.checked = e.target.checked;
+                updateMobileBtn(mdBtn, md.checked, 'dinner');
+            });
         });
 
         // Hide/Show tables
@@ -118,7 +168,10 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleLunchBtn.addEventListener("click", () => {
         allLunchChecked = !allLunchChecked;
         document.querySelectorAll(".lunch-cb").forEach(cb => {
-            cb.checked = allLunchChecked;
+            if (cb.checked !== allLunchChecked) {
+                cb.checked = allLunchChecked;
+                cb.dispatchEvent(new Event('change'));
+            }
         });
         window.showToast(allLunchChecked ? "All Lunch checked" : "All Lunch unchecked", "info");
     });
@@ -126,7 +179,10 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleDinnerBtn.addEventListener("click", () => {
         allDinnerChecked = !allDinnerChecked;
         document.querySelectorAll(".dinner-cb").forEach(cb => {
-            cb.checked = allDinnerChecked;
+            if (cb.checked !== allDinnerChecked) {
+                cb.checked = allDinnerChecked;
+                cb.dispatchEvent(new Event('change'));
+            }
         });
         window.showToast(allDinnerChecked ? "All Dinner checked" : "All Dinner unchecked", "info");
     });

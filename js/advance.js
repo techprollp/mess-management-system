@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <title>Print Advance Receipt - Room 803 Mess</title>
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                     <style>
-                        body { font-family: system-ui, -apple-system, sans-serif; padding: 20px; background: #ffffff; color: #1e293b; }
+                        body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif; padding: 20px; background: #ffffff; color: var(--text-main); }
                     </style>
                 </head>
                 <body onload="window.print(); window.close();">
@@ -128,8 +128,8 @@ document.addEventListener("DOMContentLoaded", () => {
         filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         if (filtered.length === 0) {
-            desktopTbody.innerHTML = `<tr><td colspan="5" class="empty-state"><i class="fa-solid fa-piggy-bank"></i><p>No advance payments recorded for this period.</p></td></tr>`;
-            mobileList.innerHTML = `<div class="empty-state"><i class="fa-solid fa-piggy-bank"></i><p>No advances found.</p></div>`;
+            desktopTbody.innerHTML = `<tr><td colspan="5" class="empty-state" style="padding: 24px; text-align: center; color: var(--text-secondary);"><i class="fa-solid fa-piggy-bank" style="font-size: 24px; margin-bottom: 8px;"></i><p>No advance payments recorded for this period.</p></td></tr>`;
+            mobileList.innerHTML = `<div class="empty-state" style="padding: 24px; text-align: center; color: var(--text-secondary);"><i class="fa-solid fa-piggy-bank" style="font-size: 24px; margin-bottom: 8px;"></i><p>No advances found.</p></div>`;
             return;
         }
 
@@ -142,17 +142,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const tr = document.createElement("tr");
             tr.innerHTML = `
                 <td>
-                    <strong>${name}</strong><br>
-                    <span style="font-size:11px; color:var(--text-muted);">${phone}</span>
+                    <strong style="color: var(--text-main); font-weight: 500;">${name}</strong><br>
+                    <span style="font-size:13px; color: var(--text-secondary);">${phone}</span>
                 </td>
-                <td><span class="badge" style="background: var(--primary-light); color: white;">${adv.category}</span></td>
-                <td><strong>${currency} ${parseFloat(adv.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></td>
-                <td>${adv.date}</td>
+                <td><span class="badge" style="background: rgba(0, 113, 227, 0.1); color: #0071E3; font-weight: 600; padding: 4px 10px; border-radius: 12px; font-size: 12px;">${adv.category}</span></td>
+                <td><strong style="color: var(--text-main); font-weight: 600;">${currency} ${parseFloat(adv.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></td>
+                <td style="color: var(--text-secondary);">${adv.date}</td>
                 <td style="text-align: right;">
-                    <div style="display:flex; justify-content: flex-end; gap:6px;">
-                        <button class="btn btn-outline btn-sm print-receipt-btn-action" data-id="${adv.id}"><i class="fa-solid fa-print"></i> Print</button>
-                        <button class="btn btn-primary btn-sm edit-advance-btn-action" data-id="${adv.id}"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-                        <button class="btn btn-secondary btn-sm delete-advance-btn-action" style="color:var(--danger); border-color:var(--danger);" data-id="${adv.id}"><i class="fa-solid fa-trash"></i> Delete</button>
+                    <div style="display:flex; justify-content: flex-end; gap:8px;">
+                        <button class="btn btn-outline btn-sm print-receipt-btn-action" data-id="${adv.id}" style="border-radius: 8px; border-color: #0071E3; color: #0071E3;"><i class="fa-solid fa-print"></i></button>
+                        <button class="btn btn-primary btn-sm edit-advance-btn-action" data-id="${adv.id}" style="border-radius: 8px; background-color: #0071E3;"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-sm delete-advance-btn-action" data-id="${adv.id}" style="border-radius: 8px; background-color: #FF3B30; color: white;"><i class="fa-solid fa-trash"></i></button>
                     </div>
                 </td>
             `;
@@ -160,17 +160,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Mobile view list item card
             const mCard = document.createElement("div");
-            mCard.className = "quick-list-item";
+            mCard.className = "wallet-item contact-card animate-in";
+            mCard.style.padding = "16px";
+            mCard.style.borderBottom = "1px solid var(--border-color)";
+            mCard.style.display = "flex";
+            mCard.style.justifyContent = "space-between";
+            mCard.style.alignItems = "center";
             mCard.innerHTML = `
                 <div class="quick-item-details">
-                    <span class="quick-item-title">${name}</span>
-                    <span class="quick-item-sub"><i class="fa-solid fa-calendar"></i> ${adv.date} &bull; ${adv.category}</span>
-                    <strong style="color: var(--primary-light); display:block; margin-top:4px;">${currency} ${parseFloat(adv.amount).toFixed(2)}</strong>
+                    <span class="quick-item-title" style="font-size: 16px; font-weight: 600; color: var(--text-main);">${name}</span>
+                    <span class="quick-item-sub" style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;"><i class="fa-solid fa-calendar"></i> ${adv.date} &bull; ${adv.category}</span>
+                    <strong style="color: #0071E3; display:block; margin-top:6px; font-size: 15px;">${currency} ${parseFloat(adv.amount).toFixed(2)}</strong>
                 </div>
-                <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
-                    <button class="btn btn-outline btn-sm print-receipt-btn-action" style="padding:2px 6px; font-size:11px;" data-id="${adv.id}">Print</button>
-                    <button class="btn btn-primary btn-sm edit-advance-btn-action" style="padding:2px 6px; font-size:11px;" data-id="${adv.id}">Edit</button>
-                    <button class="btn btn-secondary btn-sm delete-advance-btn-action" style="padding:2px 6px; font-size:11px; color:var(--danger); border-color:var(--danger);" data-id="${adv.id}">Delete</button>
+                <div style="display:flex; flex-direction:column; gap:6px; align-items:flex-end;">
+                    <div style="display:flex; gap: 6px;">
+                        <button class="btn btn-outline btn-sm print-receipt-btn-action" style="padding:4px 8px; font-size:12px; border-radius: 8px; border-color: #0071E3; color: #0071E3;" data-id="${adv.id}"><i class="fa-solid fa-print"></i></button>
+                        <button class="btn btn-primary btn-sm edit-advance-btn-action" style="padding:4px 8px; font-size:12px; border-radius: 8px; background-color: #0071E3;" data-id="${adv.id}"><i class="fa-solid fa-pen"></i></button>
+                    </div>
+                    <button class="btn btn-sm delete-advance-btn-action" style="padding:4px 8px; font-size:12px; border-radius: 8px; background-color: #FF3B30; color: white; width: 100%;" data-id="${adv.id}">Delete</button>
                 </div>
             `;
             mobileList.appendChild(mCard);

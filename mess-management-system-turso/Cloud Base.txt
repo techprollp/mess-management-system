@@ -1,0 +1,31 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyB4fomhq3JvuN7owSAr2rT9Kvlh4v9Zn-4",
+  authDomain: "room-803-mess.firebaseapp.com",
+  databaseURL: "https://room-803-mess-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "room-803-mess",
+  storageBucket: "room-803-mess.firebasestorage.app",
+  messagingSenderId: "759223218911",
+  appId: "1:759223218911:web:c2fb85869e4eba376e6f6a",
+  measurementId: "G-Q03ELYZL99"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+
+
+
+Failed to update API access privileges for mess_store: Failed to run sql query: ERROR: 42601: syntax error at or near "17600" QUERY: grant SELECT on table 17600 to anon CONTEXT: PL/pgSQL function inline_code_block line 3 at EXECUTE 
+
+
+https://lufcxhhrdexkznkuilzb.supabase.co/rest/v1/mess_store

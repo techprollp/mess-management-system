@@ -1,4 +1,4 @@
-// Members.js - Directory and Inline Registration Logic with Real-Time Reactive Listeners (v23.0)
+// Members.js - Directory and Inline Registration Logic with Real-Time Reactive Listeners (v30.0)
 
 document.addEventListener("DOMContentLoaded", () => {
     initMembersDirectoryPage();
@@ -33,6 +33,8 @@ function initMembersDirectoryPage() {
     if (addDateInput) {
         addDateInput.value = new Date().toISOString().split('T')[0];
     }
+
+    const colors = ['blue','green','orange','red','purple','pink','teal'];
 
     let membersList = db.getMembers();
 
@@ -70,7 +72,7 @@ function initMembersDirectoryPage() {
             return;
         }
 
-        filtered.forEach(m => {
+        filtered.forEach((m, index) => {
             const isActive = m.status === "active";
 
             // Desktop Row
@@ -95,31 +97,27 @@ function initMembersDirectoryPage() {
             desktopTbody.appendChild(tr);
 
             // Mobile Card
+            const color = colors[index % colors.length];
+            const initial = m.name.charAt(0).toUpperCase();
+
             const mobileCard = document.createElement("div");
-            mobileCard.className = "mobile-table-card";
+            mobileCard.className = "contact-card";
             mobileCard.innerHTML = `
-                <div class="card-row">
-                    <span class="row-label">Name</span>
-                    <span class="row-value"><strong>${m.name}</strong></span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Phone</span>
-                    <span class="row-value">${m.phone}</span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">Status</span>
-                    <span class="row-value">
+                <div class="contact-card-inner">
+                    <div class="avatar ${color}">${initial}</div>
+                    <div class="contact-info">
+                        <h4>${m.name}</h4>
+                        <p>${m.phone}</p>
+                    </div>
+                    <div class="contact-status">
                         <span class="badge ${isActive ? 'badge-success' : 'badge-danger'}">
                             ${isActive ? 'Active' : 'Inactive'}
                         </span>
-                    </span>
+                    </div>
                 </div>
-                <div class="card-row" style="margin-top: 8px; border-top: 1px solid var(--border-color); padding-top: 8px;">
-                    <span class="row-label">Actions</span>
-                    <span class="row-value" style="display:flex; gap:8px; justify-content:flex-end;">
-                        <button class="btn btn-outline btn-sm edit-btn" style="width:auto; margin:0;" data-id="${m.id}"><i class="fa-solid fa-pen"></i> Edit</button>
-                        <button class="btn btn-danger btn-sm delete-btn" style="width:auto; margin:0;" data-id="${m.id}"><i class="fa-solid fa-trash"></i> Delete</button>
-                    </span>
+                <div class="contact-actions">
+                    <button class="btn btn-outline btn-sm edit-btn" data-id="${m.id}"><i class="fa-solid fa-pen"></i> Edit</button>
+                    <button class="btn btn-danger btn-sm delete-btn" data-id="${m.id}"><i class="fa-solid fa-trash"></i> Delete</button>
                 </div>
             `;
             mobileList.appendChild(mobileCard);

@@ -19,35 +19,40 @@ document.addEventListener("DOMContentLoaded", () => {
         const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const todayDay = days[date.getDay()];
 
-        daysOfWeek.forEach(day => {
+        daysOfWeek.forEach((day, index) => {
             const dayMenu = menu[day] || { lunch: "Not Scheduled", dinner: "Not Scheduled" };
             const isToday = day === todayDay;
 
             const card = document.createElement("div");
-            card.className = "card menu-widget";
+            card.className = "card menu-widget animate-in";
             card.style.margin = "0";
+            card.style.borderRadius = "24px";
+            card.style.animationDelay = `${index * 0.05}s`;
+            
             if (isToday) {
-                card.style.border = "2px solid var(--primary-light)";
-                card.style.boxShadow = "var(--shadow-md)";
+                card.style.border = "2px solid #0071E3";
+            } else {
+                card.style.border = "1px solid var(--border-color)";
+                card.style.boxShadow = "none";
             }
 
             card.innerHTML = `
-                <div class="menu-day-title" style="${isToday ? 'background: linear-gradient(135deg, var(--primary), var(--primary-light));' : ''}">
+                <div class="menu-day-title" style="padding: 16px 20px; font-weight: 600; border-bottom: 1px solid var(--border-color); ${isToday ? 'background-color: #0071E3; color: white;' : 'background-color: var(--bg-secondary); color: var(--text-main);'} border-top-left-radius: 24px; border-top-right-radius: 24px;">
                     <span><i class="fa-solid fa-calendar-day"></i> ${day}</span>
-                    ${isToday ? '<span class="badge badge-success" style="color:var(--success); background-color:white; font-size:10px; padding:3px 8px;">TODAY</span>' : ''}
+                    ${isToday ? '<span class="badge" style="color:#0071E3; background-color:white; font-size:11px; padding:4px 8px; border-radius: 12px; font-weight: 600;">TODAY</span>' : ''}
                 </div>
-                <div class="menu-meals">
+                <div class="menu-meals" style="padding: 20px;">
                     <div class="menu-meal-block">
-                        <div class="meal-label"><i class="fa-solid fa-sun"></i> Lunch</div>
-                        <div class="meal-value">${dayMenu.lunch}</div>
+                        <div class="meal-label" style="color: #FF9500; font-weight: 500;"><i class="fa-solid fa-sun"></i> Lunch</div>
+                        <div class="meal-value" style="font-size: 15px; color: var(--text-main); margin-top: 4px;">${dayMenu.lunch}</div>
                     </div>
-                    <div class="menu-meal-block" style="border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 12px;">
-                        <div class="meal-label" style="color: var(--info);"><i class="fa-solid fa-moon"></i> Dinner</div>
-                        <div class="meal-value">${dayMenu.dinner}</div>
+                    <div class="menu-meal-block" style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-top: 16px;">
+                        <div class="meal-label" style="color: #0071E3; font-weight: 500;"><i class="fa-solid fa-moon"></i> Dinner</div>
+                        <div class="meal-value" style="font-size: 15px; color: var(--text-main); margin-top: 4px;">${dayMenu.dinner}</div>
                     </div>
                 </div>
                 <div style="padding: 0 20px 20px 20px;">
-                    <button class="btn btn-outline edit-menu-btn" data-day="${day}" style="width: 100%;"><i class="fa-solid fa-pen-to-square"></i> Edit Day Menu</button>
+                    <button class="btn btn-outline edit-menu-btn" data-day="${day}" style="width: 100%; border-radius: 12px; font-weight: 500; ${isToday ? 'border-color: #0071E3; color: #0071E3;' : ''}"><i class="fa-solid fa-pen-to-square"></i> Edit Day Menu</button>
                 </div>
             `;
 

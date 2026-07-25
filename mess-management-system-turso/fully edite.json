@@ -1,0 +1,3148 @@
+{
+    "settings": {
+        "roomNo": "803",
+        "currency": "AED",
+        "adminPassword": "admin",
+        "initialized": true,
+        "tursoEnabled": true,
+        "tursoConfig": {
+            "url": "https://room-803-mess-db-mess-management-system.aws-eu-west-1.turso.io",
+            "token": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3ODQ2MjAzMDUsImlkIjoiMDE5ZjgzYTctZGYwMS03Y2RiLWExMjEtNjZlYWZjMTYwM2QxIiwia2lkIjoidmFPTk5yY213b1FucVZQTE1nMW9WOUtSVTBpb3IwdjZxZGphRllUa3RzTSIsInJpZCI6IjBiOTMzOWFkLWZkMDgtNDlkOC1iZDdlLTk4ZTlkZGQyZDQyZCJ9.2_0CS2j9S3G8OjVv_lmlTwmAUMD_6m06_Vj7awJwK-Kb1rPcN7ObtfOdwyxJ2jrJbdGFbF0I3TaCQ5U9sW0aAA"
+        }
+    },
+    "members": [
+        {
+            "id": "m1784553643872",
+            "name": "Mohd Shareef k",
+            "email": "mohammedshareefk009@gmail.com",
+            "phone": "+919567260289",
+            "status": "active",
+            "joinedDate": "2026-07-13"
+        },
+        {
+            "id": "m1784553711255",
+            "name": "Mithun PV",
+            "email": "",
+            "phone": "+971545756790",
+            "status": "active",
+            "joinedDate": "2026-07-13"
+        },
+        {
+            "id": "m1784553756783",
+            "name": "Mohd Fayis",
+            "email": "",
+            "phone": "+971545153203",
+            "status": "active",
+            "joinedDate": "2026-07-13"
+        },
+        {
+            "id": "m1784553791327",
+            "name": "Murshid",
+            "email": "",
+            "phone": "+971545028712",
+            "status": "active",
+            "joinedDate": "2026-07-13"
+        },
+        {
+            "id": "m1784553828110",
+            "name": "Basheer",
+            "email": "",
+            "phone": "+919567783414",
+            "status": "active",
+            "joinedDate": "2026-07-13"
+        },
+        {
+            "id": "m1784553938365",
+            "name": "Nihal",
+            "email": "",
+            "phone": "+917994059903",
+            "status": "active",
+            "joinedDate": "2026-07-13"
+        },
+        {
+            "id": "m1784554513865",
+            "name": "Shareef T",
+            "email": "",
+            "phone": "+971555510207",
+            "status": "active",
+            "joinedDate": "2026-07-13"
+        },
+        {
+            "id": "m1784554572288",
+            "name": "Rishal",
+            "email": "",
+            "phone": "+919747467747",
+            "status": "active",
+            "joinedDate": "2026-07-15"
+        },
+        {
+            "id": "m1784554625111",
+            "name": "Uvais",
+            "email": "",
+            "phone": "+971567289280",
+            "status": "active",
+            "joinedDate": "2026-07-15"
+        },
+        {
+            "id": "m1784554656807",
+            "name": "Ibrahim",
+            "email": "",
+            "phone": "+971567502759",
+            "status": "active",
+            "joinedDate": "2026-07-15"
+        },
+        {
+            "id": "m1784554686791",
+            "name": "Arshav",
+            "email": "",
+            "phone": "+971558619294",
+            "status": "active",
+            "joinedDate": "2026-07-15"
+        },
+        {
+            "id": "m1784554722807",
+            "name": "Nizam",
+            "email": "",
+            "phone": "+919659868453",
+            "status": "active",
+            "joinedDate": "2026-07-13"
+        },
+        {
+            "id": "m1784554751606",
+            "name": "Vimal",
+            "email": "",
+            "phone": "+919567070408",
+            "status": "active",
+            "joinedDate": "2026-07-13"
+        },
+        {
+            "id": "m1784554781446",
+            "name": "Jithin",
+            "email": "",
+            "phone": "+918943594501",
+            "status": "active",
+            "joinedDate": "2026-07-13"
+        },
+        {
+            "id": "m1784554851526",
+            "name": "Fayas",
+            "email": "",
+            "phone": "+971555907036",
+            "status": "active",
+            "joinedDate": "2026-07-13"
+        },
+        {
+            "id": "m1784714811154",
+            "name": "Dhanesh",
+            "phone": "+919447727961",
+            "email": "",
+            "status": "active",
+            "joinedDate": "2026-07-23"
+        }
+    ],
+    "bills": [
+        {
+            "id": "b1784555418921",
+            "date": "2026-07-13",
+            "notes": "",
+            "title": "Shoukath",
+            "amount": 350,
+            "category": "Food",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554851526",
+                "m1784714811154"
+            ]
+        },
+        {
+            "id": "b1784555485208",
+            "date": "2026-07-16",
+            "notes": "",
+            "title": "water",
+            "amount": 40,
+            "category": "Others",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554722807",
+                "m1784554781446",
+                "m1784554851526"
+            ]
+        },
+        {
+            "id": "b1784555785470",
+            "date": "2026-07-13",
+            "notes": "",
+            "title": "Mill",
+            "amount": 684,
+            "category": "Groceries",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554851526",
+                "m1784714811154"
+            ]
+        },
+        {
+            "id": "b1784555823445",
+            "date": "2026-07-13",
+            "notes": "",
+            "title": "Gas",
+            "amount": 135,
+            "category": "Utilities",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554851526"
+            ]
+        },
+        {
+            "id": "b1784555985228",
+            "date": "2026-07-13",
+            "notes": "",
+            "title": "Fridge Repaire",
+            "amount": 185,
+            "category": "Others",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554751606",
+                "m1784554851526"
+            ]
+        },
+        {
+            "id": "b1784556061252",
+            "date": "2026-07-13",
+            "notes": "",
+            "title": "Cleaning Iteams",
+            "amount": 60,
+            "category": "Others",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554722807",
+                "m1784554751606",
+                "m1784554781446",
+                "m1784554851526"
+            ]
+        },
+        {
+            "id": "b1784556089539",
+            "date": "2026-07-13",
+            "notes": "",
+            "title": "Mixi",
+            "amount": 250,
+            "category": "Others",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554751606",
+                "m1784554851526"
+            ]
+        },
+        {
+            "id": "b1784556152970",
+            "date": "2026-07-13",
+            "notes": "",
+            "title": "Mark & Save",
+            "amount": 235,
+            "category": "Groceries",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554851526"
+            ]
+        },
+        {
+            "id": "b1784556181226",
+            "date": "2026-07-14",
+            "notes": "",
+            "title": "Freshcart",
+            "amount": 18.5,
+            "category": "Groceries",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554851526"
+            ]
+        },
+        {
+            "id": "b1784556207082",
+            "date": "2026-07-14",
+            "notes": "",
+            "title": "chiken",
+            "amount": 131,
+            "category": "Groceries",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554851526"
+            ]
+        },
+        {
+            "id": "b1784556268489",
+            "date": "2026-07-15",
+            "notes": "",
+            "title": "Groceries ( 4 Egg)",
+            "amount": 3,
+            "category": "Groceries",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554851526"
+            ]
+        },
+        {
+            "id": "b1784556307226",
+            "date": "2026-07-18",
+            "notes": "",
+            "title": "Freshcart",
+            "amount": 88,
+            "category": "Groceries",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554851526"
+            ]
+        },
+        {
+            "id": "b1784556348658",
+            "date": "2026-07-19",
+            "notes": "",
+            "title": "Mark & Save",
+            "amount": 390,
+            "category": "Groceries",
+            "invoiceName": "",
+            "applicableMembers": [
+                "m1784553643872",
+                "m1784553711255",
+                "m1784553756783",
+                "m1784553791327",
+                "m1784553828110",
+                "m1784553938365",
+                "m1784554513865",
+                "m1784554572288",
+                "m1784554625111",
+                "m1784554656807",
+                "m1784554686791",
+                "m1784554851526"
+            ]
+        }
+    ],
+    "payments": {
+        "2026-07": {
+            "m1784553643872": {
+                "paid": false,
+                "amount": 0,
+                "advance": 0,
+                "payDate": ""
+            },
+            "m1784553711255": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784553756783": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784553791327": {
+                "paid": false,
+                "amount": 0,
+                "advance": 0,
+                "payDate": ""
+            },
+            "m1784553828110": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784553938365": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784554513865": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784554572288": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784554625111": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784554656807": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784554686791": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784554722807": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784554751606": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784554781446": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            },
+            "m1784554851526": {
+                "paid": false,
+                "amount": 0,
+                "payDate": ""
+            }
+        }
+    },
+    "menu": {
+        "Friday": {
+            "lunch": "Ghee Rice + Chicken Curry",
+            "dinner": "Fish Curry"
+        },
+        "Monday": {
+            "lunch": "Meals + Fish Fry + Veg Curry",
+            "dinner": "Puttu + Kadala Curry"
+        },
+        "Sunday": {
+            "lunch": "Biriyani + Salad",
+            "dinner": "There is no mess dinner today."
+        },
+        "Tuesday": {
+            "lunch": "Meals + Fish Curry + Upperi",
+            "dinner": "Dosha + Greenpes Curry Or Egg Curry"
+        },
+        "Saturday": {
+            "lunch": "Meals + Fish Fry + Veg Curry",
+            "dinner": "Chiken Fry +Kuboos or Chiken Curry+ kuboos"
+        },
+        "Thursday": {
+            "lunch": "Meals + Fish Curry + Upperi",
+            "dinner": "Dosha + Veg Curry or Egg Curry"
+        },
+        "Wednesday": {
+            "lunch": "Meals + Fish Fry + Veg Curry",
+            "dinner": "Biriyani + Salad"
+        }
+    },
+    "attendance": {
+        "2026-07-13": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-14": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-15": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-16": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-17": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-18": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-19": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-20": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-21": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-22": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-31": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-30": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-29": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-01": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-02": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-03": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-04": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-05": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-06": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-07": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-08": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-09": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-10": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-11": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-12": {
+            "m1784553643872": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553711255": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553756783": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553791327": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553828110": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784553938365": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554513865": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554572288": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554625111": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554686791": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-28": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-27": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-26": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-25": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-24": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-07-23": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-08-01": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-08-02": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-08-03": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-08-04": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-08-05": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-08-06": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-08-07": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-08-08": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            }
+        },
+        "2026-08-09": {
+            "m1784553643872": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553711255": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553756783": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553791327": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553828110": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784553938365": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554513865": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554572288": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554625111": {
+                "lunch": true,
+                "dinner": false
+            },
+            "m1784554656807": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554686791": {
+                "lunch": true,
+                "dinner": true
+            },
+            "m1784554722807": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554751606": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554781446": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784554851526": {
+                "lunch": false,
+                "dinner": false
+            },
+            "m1784714811154": {
+                "lunch": true,
+                "dinner": true
+            }
+        }
+    },
+    "rules": [
+        "Monthly expenses are compiled and split on the last day of each month.",
+        "All members must clear their monthly mess payment before the 12th of every month.",
+        "Any member who wants to skip meals must inform the mess at least 2 days before.",
+        "If any member requires a special, additional, or new food item, they must inform the Chef at least 5 hours in advance to make the necessary arrangements for preparation.",
+        "Mess Period: 10th of the current month to 9th of the following month.",
+        "If a new person is joining, please let the mess management know in advance.",
+        "Dear all, if you would like to change the mess menu, please inform the group in advance so everyone can share their opinion. Any menu changes should be announced in the mess WhatsApp group."
+    ],
+    "closedMonths": {}
+}

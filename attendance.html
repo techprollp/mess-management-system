@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Attendance - Room 803 Mess</title>
     <!-- CSS Dependencies -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/style.css?v=30.0">
+    <link rel="stylesheet" href="css/dashboard.css?v=30.0">
+    <link rel="stylesheet" href="css/responsive.css?v=30.0">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -25,20 +25,20 @@
         </div>
 
         <!-- Date selector card -->
-        <div class="card" style="padding: 16px; margin-bottom: 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+        <div class="card animate-in" style="padding: 16px; margin-bottom: 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
             <div style="display:flex; align-items:center; gap:12px;">
                 <label for="attendance-date" style="font-weight: 600; font-size: 14px; margin-bottom:0;">Select Date:</label>
-                <input type="date" id="attendance-date" class="form-control" style="max-width: 180px;">
+                <input type="date" id="attendance-date" class="form-control" style="max-width: 180px; border-radius: 20px;">
             </div>
             
             <div style="display:flex; gap:12px;" class="form-row">
-                <button class="btn btn-outline btn-sm" id="toggle-all-lunch"><i class="fa-solid fa-sun"></i> Toggle All Lunch</button>
-                <button class="btn btn-outline btn-sm" id="toggle-all-dinner"><i class="fa-solid fa-moon"></i> Toggle All Dinner</button>
+                <button type="button" class="btn btn-outline btn-sm" id="toggle-all-lunch" style="border-radius: 20px;"><i class="fa-solid fa-sun"></i> Toggle All Lunch</button>
+                <button type="button" class="btn btn-outline btn-sm" id="toggle-all-dinner" style="border-radius: 20px;"><i class="fa-solid fa-moon"></i> Toggle All Dinner</button>
             </div>
         </div>
 
         <!-- Attendance Form list -->
-        <div class="card">
+        <div class="card animate-in" style="animation-delay: 0.1s">
             <div class="card-title">
                 <span><i class="fa-solid fa-clipboard-user"></i> Roommate Attendance Log</span>
                 <span id="date-badge-label" class="badge badge-success" style="font-size:12px;">Today</span>
@@ -68,7 +68,7 @@
                 </div>
 
                 <div style="margin-top: 24px; display:flex; justify-content:flex-end;">
-                    <button type="submit" class="btn btn-primary" style="padding: 12px 32px; font-size: 15px;"><i class="fa-solid fa-cloud-arrow-up"></i> Save Daily Attendance</button>
+                    <button type="submit" class="btn btn-primary" style="padding: 12px 32px; font-size: 15px; border-radius: 20px;"><i class="fa-solid fa-cloud-arrow-up"></i> Save Daily Attendance</button>
                 </div>
             </form>
         </div>
@@ -76,8 +76,8 @@
     </div>
 
     <!-- Script dependencies -->
-    <script src="js/storage.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/attendance.js"></script>
+    <script src="js/storage.js?v=30.0"></script>
+    <script src="js/app.js?v=30.0"></script>
+    <script src="js/attendance.js?v=30.0"></script>
 </body>
 </html>

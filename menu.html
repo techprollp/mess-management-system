@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lunch & Dinner Menu - Room 803 Mess</title>
     <!-- CSS Dependencies -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/style.css?v=30.0">
+    <link rel="stylesheet" href="css/dashboard.css?v=30.0">
+    <link rel="stylesheet" href="css/responsive.css?v=30.0">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -19,11 +19,11 @@
         <!-- Header Bar -->
         <div class="header-bar">
             <div class="page-title">
-                <h2>Lunch & Dinner Menu Planner</h2>
-                <p>Configure the weekly food schedule. Members can see this on the Home portal.</p>
+                <h2 style="font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">Lunch & Dinner Menu Planner</h2>
+                <p style="color: var(--text-secondary); font-size: 15px;">Configure the weekly food schedule. Members can see this on the Home portal.</p>
             </div>
             <div class="header-actions">
-                <button class="btn btn-outline" id="reset-menu-btn"><i class="fa-solid fa-rotate-left"></i> Reset to Default</button>
+                <button class="btn btn-outline" id="reset-menu-btn" style="border-radius: 20px; font-weight: 500;"><i class="fa-solid fa-rotate-left"></i> Reset to Default</button>
             </div>
         </div>
 
@@ -36,36 +36,36 @@
 
     <!-- Edit Menu Modal Dialog -->
     <div id="edit-menu-modal" class="modal-overlay">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3>Edit Menu: <span id="modal-day-name">Monday</span></h3>
-                <button class="modal-close" id="close-menu-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-container" style="border-radius: 24px; padding: 24px;">
+            <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+                <h3 style="font-weight: 600; font-size: 20px;">Edit Menu: <span id="modal-day-name" style="color: #0071E3;">Monday</span></h3>
+                <button class="modal-close" id="close-menu-modal-btn" style="background: var(--bg-secondary); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <form id="edit-menu-form">
-                <div class="modal-body">
+                <div class="modal-body" style="padding-top: 16px;">
                     <input type="hidden" id="edit-day-key">
                     
                     <div class="form-group">
-                        <label for="edit-lunch-input"><i class="fa-solid fa-sun" style="color: var(--warning);"></i> Lunch Menu</label>
-                        <input type="text" id="edit-lunch-input" class="form-control" placeholder="e.g. Chicken Biryani + Salad" required>
+                        <label for="edit-lunch-input" style="font-weight: 500;"><i class="fa-solid fa-sun" style="color: #FF9500;"></i> Lunch Menu</label>
+                        <input type="text" id="edit-lunch-input" class="form-control" placeholder="e.g. Chicken Biryani + Salad" required style="border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color);">
                     </div>
                     
                     <div class="form-group">
-                        <label for="edit-dinner-input"><i class="fa-solid fa-moon" style="color: var(--info);"></i> Dinner Menu</label>
-                        <input type="text" id="edit-dinner-input" class="form-control" placeholder="e.g. Chapati + Dal + Chicken Curry" required>
+                        <label for="edit-dinner-input" style="font-weight: 500;"><i class="fa-solid fa-moon" style="color: #0071E3;"></i> Dinner Menu</label>
+                        <input type="text" id="edit-dinner-input" class="form-control" placeholder="e.g. Chapati + Dal + Chicken Curry" required style="border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color);">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="cancel-menu-edit-btn">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Menu</button>
+                <div class="modal-footer" style="border-top: none; padding-top: 0;">
+                    <button type="button" class="btn btn-secondary" id="cancel-menu-edit-btn" style="border-radius: 12px; font-weight: 500;">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="border-radius: 12px; background-color: #0071E3; font-weight: 500;">Save Menu</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Script dependencies -->
-    <script src="js/storage.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/menu.js"></script>
+    <script src="js/storage.js?v=30.0"></script>
+    <script src="js/app.js?v=30.0"></script>
+    <script src="js/menu.js?v=30.0"></script>
 </body>
 </html>

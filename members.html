@@ -28,7 +28,7 @@
         </div>
 
         <!-- Filter and Search Toolbar -->
-        <div class="card" style="padding: 16px; margin-bottom: 20px;">
+        <div class="card animate-in" style="padding: 16px; margin-bottom: 20px; animation-delay: 0.1s;">
             <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;" class="form-row">
                 <div style="position: relative;">
                     <input type="text" id="member-search" class="form-control" placeholder="Search members by name or phone..." style="padding-left: 40px;">
@@ -45,7 +45,7 @@
         </div>
 
         <!-- Directory Content -->
-        <div class="card">
+        <div class="card animate-in" style="animation-delay: 0.2s;">
             <!-- Desktop Layout -->
             <div class="table-responsive desktop-table-only">
                 <table class="table">
@@ -66,7 +66,7 @@
             </div>
 
             <!-- Mobile Layout -->
-            <div id="members-mobile-list" style="display: none;">
+            <div id="members-mobile-list" style="display: none;" class="grouped-list">
                 <!-- Loaded dynamically -->
             </div>
         </div>
@@ -153,8 +153,8 @@
     </div>
 
     <!-- Script dependencies -->
-    <script src="js/storage.js?v=23.0"></script>
-    <script src="js/app.js?v=23.0"></script>
-    <script src="js/members.js?v=23.0"></script>
+    <script src="js/storage.js?v=30.0"></script>
+    <script src="js/app.js?v=30.0"></script>
+    <script src="js/members.js?v=30.0"></script>
 </body>
 </html>

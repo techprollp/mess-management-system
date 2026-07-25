@@ -1,0 +1,25 @@
+
+/* Viewer Mode (Read-Only) */
+.viewer-mode .btn-primary:not(#recalc-btn),
+.viewer-mode .btn-danger,
+.viewer-mode .btn-success,
+.viewer-mode [data-action="unpaid"],
+.viewer-mode [data-action="paid"],
+.viewer-mode .delete-btn,
+.viewer-mode .edit-payment-btn,
+.viewer-mode .btn[onclick*="save"],
+.viewer-mode .btn[onclick*="add"],
+.viewer-mode .btn[onclick*="delete"],
+.viewer-mode .btn[onclick*="remove"],
+.viewer-mode #open-add-bill-btn,
+.viewer-mode #add-member-btn,
+.viewer-mode #close-month-btn,
+.viewer-mode .header-actions button:not(.global-sync-btn):not(#recalc-btn):not(.global-backup-btn) {
+    display: none !important;
+}
+.viewer-mode input:not([type="search"]):not(#global-month-picker),
+.viewer-mode select,
+.viewer-mode textarea {
+    pointer-events: none;
+    opacity: 0.6;
+}

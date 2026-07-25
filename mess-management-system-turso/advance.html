@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance Payments - Room 803 Mess</title>
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Target for layout injection by app.js -->
+    <div id="app">
+        
+        <!-- Header Bar -->
+        <div class="header-bar">
+            <div class="page-title">
+                <h2>Advance Payments Registry</h2>
+                <p>Record, manage, and print advance payments made by roommates.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="open-add-advance-modal-btn"><i class="fa-solid fa-hand-holding-dollar"></i> Add Advance Payment</button>
+            </div>
+        </div>
+
+        <!-- Filter and Search Toolbar -->
+        <div class="card" style="padding: 16px; margin-bottom: 20px;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px;" class="form-row">
+                <div style="position: relative;">
+                    <input type="text" id="advance-search" class="form-control" placeholder="Search by roommate name..." style="padding-left: 40px;">
+                    <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 16px; top: 14px; color: var(--text-muted);"></i>
+                </div>
+                <div>
+                    <select id="category-filter" class="form-control">
+                        <option value="all">All Categories</option>
+                        <option value="Food Advance">Food Advance</option>
+                        <option value="Room Rent">Room Rent</option>
+                        <option value="General Advance">General Advance</option>
+                    </select>
+                </div>
+                <div>
+                    <button class="btn btn-outline" id="print-ledger-btn" style="width:100%;"><i class="fa-solid fa-print"></i> Print Registry</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Directory Content -->
+        <div class="card">
+            <!-- Desktop Layout -->
+            <div class="table-responsive desktop-table-only">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Roommate Name</th>
+                            <th>Category</th>
+                            <th>Amount (AED)</th>
+                            <th>Date</th>
+                            <th style="text-align: right;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="advances-table-body">
+                        <!-- Loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile Layout -->
+            <div id="advances-mobile-list" style="display: none;">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Add / Edit Advance Payment Modal Dialog -->
+    <div id="advance-modal" class="modal-overlay">
+        <div class="modal-container" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 id="modal-title">Add Advance Payment</h3>
+                <button class="modal-close" id="close-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="advance-form">
+                <input type="hidden" id="advance-id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="advance-member-select">Roommate Member *</label>
+                        <select id="advance-member-select" class="form-control" required>
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="advance-amount">Amount (AED) *</label>
+                        <input type="number" id="advance-amount" class="form-control" step="0.01" min="0.01" placeholder="0.00" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="advance-date">Payment Date *</label>
+                        <input type="date" id="advance-date" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="advance-category">Category *</label>
+                        <select id="advance-category" class="form-control" required>
+                            <option value="Food Advance">Food Advance</option>
+                            <option value="Room Rent">Room Rent</option>
+                            <option value="General Advance">General Advance</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-modal-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save & Sync</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Printable Official Advance Payment Receipt Modal -->
+    <div id="receipt-modal" class="modal-overlay">
+        <div class="modal-container" style="max-width: 550px; background: #ffffff; color: #1e293b; border-radius: 16px; overflow-y: auto; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);">
+            <div id="printable-receipt" style="padding: 30px 30px 10px 30px; font-family: system-ui, -apple-system, sans-serif;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 20px;">
+                    <div>
+                        <h2 style="font-size: 20px; font-weight: 800; color: #1e3a8a; margin: 0; text-transform: uppercase;">Room 803 Mess Portal</h2>
+                        <p style="font-size: 12px; color: #64748b; margin: 4px 0 0 0;">Official Advance Receipt</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; background: #dbeafe; color: #1e40af; text-transform: uppercase;">Advance Payment</span>
+                        <div style="font-size: 11px; font-weight: 700; color: #64748b; margin-top: 6px;" id="receipt-no">#ADV-803-001</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; background: #f8fafc; padding: 16px; border-radius: 8px; font-size: 13px;">
+                    <div>
+                        <span style="font-size: 11px; color: #64748b; display: block; font-weight: 600;">RECEIVED FROM</span>
+                        <strong id="receipt-member-name" style="font-size: 15px; color: #0f172a;">--</strong>
+                        <span id="receipt-member-phone" style="color: #64748b; display: block; margin-top: 2px;">--</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="font-size: 11px; color: #64748b; display: block; font-weight: 600;">RECEIPT DATE</span>
+                        <strong id="receipt-date" style="font-size: 14px; color: #0f172a;">--</strong>
+                    </div>
+                </div>
+
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; margin-bottom: 30px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #e2e8f0; color: #475569;">
+                            <th style="padding: 10px 0;">Description</th>
+                            <th style="padding: 10px 0; text-align: right;">Amount (AED)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 14px 0;">
+                                <strong id="receipt-description">Advance Payment Credit</strong><br>
+                                <span style="font-size: 11px; color: #64748b;" id="receipt-category-desc">Category: Food Advance</span>
+                            </td>
+                            <td style="padding: 14px 0; text-align: right; font-weight: 700; font-size: 15px;" id="receipt-amount">0.00 AED</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 14px 0; font-weight: 700; color: #0f172a; font-size: 14px;">Total Received (Advance)</td>
+                            <td style="padding: 14px 0; text-align: right; font-weight: 800; font-size: 16px; color: #1e3a8a;" id="receipt-total">0.00 AED</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="border-top: 1px dashed #cbd5e1; padding-top: 20px; text-align: center; font-size: 11px; color: #94a3b8;">
+                    <p style="margin: 0;">This is a computer-generated transaction receipt. Thank you for your advance payment.</p>
+                    <p style="margin: 4px 0 0 0;">Room 803 Mess Administration &bull; Universal Multi-Cloud Ledger Sync</p>
+                </div>
+            </div>
+            <div style="background: #ffffff; padding: 0px 30px 30px 30px; display: flex; justify-content: flex-end; gap: 10px; border-top: 1px dashed #e2e8f0; margin-top: 10px; padding-top: 20px;">
+                <button class="btn btn-outline" id="close-receipt-btn">Close</button>
+                <button class="btn btn-primary" id="print-receipt-btn"><i class="fa-solid fa-print"></i> Print Receipt</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Core Dependencies -->
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/advance.js"></script>
+</body>
+</html>

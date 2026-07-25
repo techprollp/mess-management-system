@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Reports - Room 803 Mess</title>
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* CSS Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .sidebar, .mobile-header, .mobile-nav-bar, .header-bar, .report-actions-panel, .theme-toggle, .btn {
+                display: none !important;
+            }
+            .main-content {
+                margin-left: 0 !important;
+                padding: 0 !important;
+            }
+            .card {
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin-bottom: 30px !important;
+                page-break-inside: avoid;
+            }
+            .print-header {
+                display: block !important;
+                text-align: center;
+                margin-bottom: 30px;
+                border-bottom: 2px solid #000;
+                padding-bottom: 10px;
+            }
+            .table th {
+                background-color: #f1f5f9 !important;
+                color: black !important;
+                border-bottom: 2px solid #000 !important;
+            }
+            .table td, .table th {
+                padding: 8px 12px !important;
+                border-bottom: 1px solid #e2e8f0 !important;
+            }
+        }
+        
+        .print-header {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Target for layout injection by app.js -->
+    <div id="app">
+        
+        <!-- Header Bar -->
+        <div class="header-bar">
+            <div class="page-title">
+                <h2>Monthly Reports & Analytics</h2>
+                <p>View consolidated monthly accounts, category stats, and print ledger invoices.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="print-report-btn"><i class="fa-solid fa-print"></i> Print Account Statement</button>
+            </div>
+        </div>
+
+        <!-- Print only header -->
+        <div class="print-header">
+            <h1 style="font-size: 24px; font-weight:800; margin-bottom: 4px;">ROOM 803 MESS MANAGEMENT SYSTEM</h1>
+            <p style="font-size: 14px; color: #64748b;">Consolidated Monthly Account Statement</p>
+            <p style="font-size: 12px; font-weight:700; margin-top:10px;">Billing Period: <span id="print-billing-month">July 2026</span> • Status: <span id="print-closing-status">Closed</span></p>
+        </div>
+
+        <!-- Filter bar -->
+        <div class="card report-actions-panel" style="padding: 16px; margin-bottom: 20px;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;" class="form-row">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <label for="report-month-select" style="font-weight: 600; font-size: 14px; white-space: nowrap; margin-bottom:0;">Select Period:</label>
+                    <select id="report-month-select" class="form-control" style="max-width: 340px;">
+                        <option value="2026-07">July 2026</option>
+                        <option value="2026-06">June 2026</option>
+                    </select>
+                    <span id="report-closing-badge" class="badge badge-success">Active Cycle</span>
+                </div>
+                <div style="text-align: right; display: flex; justify-content: flex-end; gap: 8px;">
+                    <button id="close-month-btn" class="btn btn-primary btn-sm"><i class="fa-solid fa-file-signature"></i> Finalize & Close Month</button>
+                    <button class="btn btn-outline btn-sm" id="export-csv-btn"><i class="fa-solid fa-file-excel"></i> Export CSV</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Report Section -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;" class="dashboard-grid">
+            
+            <!-- Left Side: Summary Sheet & Category Table -->
+            <div style="display:flex; flex-direction:column; gap:24px;">
+                <div class="card">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-chart-simple"></i> Account Sheet Overview</span>
+                    </div>
+                    <div class="quick-list">
+                        <div class="quick-list-item">
+                            <div class="quick-item-details">
+                                <span class="quick-item-title">Total Active Members</span>
+                            </div>
+                            <span class="quick-item-action" id="rep-active-members">--</span>
+                        </div>
+                        <div class="quick-list-item">
+                            <div class="quick-item-details">
+                                <span class="quick-item-title">Total Compiled Expenses</span>
+                            </div>
+                            <span class="quick-item-action" id="rep-total-expenses" style="color:var(--warning);">AED 0</span>
+                        </div>
+                        <div class="quick-list-item" style="background: linear-gradient(135deg, rgba(30,64,175,0.05), rgba(14,165,233,0.05));">
+                            <div class="quick-item-details">
+                                <span class="quick-item-title" style="color:var(--primary-light); font-weight:700;">Monthly Fee per Member</span>
+                            </div>
+                            <span class="quick-item-action" id="rep-fee-per-member" style="color:var(--primary-light); font-weight:800;">AED 0</span>
+                        </div>
+                        <div class="quick-list-item">
+                            <div class="quick-item-details">
+                                <span class="quick-item-title">Total Amount Collected</span>
+                            </div>
+                            <span class="quick-item-action" id="rep-total-collected" style="color:var(--success);">AED 0</span>
+                        </div>
+                        <div class="quick-list-item">
+                            <div class="quick-item-details">
+                                <span class="quick-item-title">Total Pending Balance</span>
+                            </div>
+                            <span class="quick-item-action" id="rep-pending-balance" style="color:var(--danger);">AED 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expenses list categorized -->
+                <div class="card">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-tags"></i> Category Breakdown</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Count</th>
+                                    <th style="text-align: right;">Total Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="category-report-tbody">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Graphic charts -->
+            <div>
+                <div class="card" style="height: 100%;">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-chart-pie"></i> Visual Summary</span>
+                    </div>
+                    <div class="chart-container" style="height: 350px;">
+                        <canvas id="reportChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Sheet: Detailed Member Payment Statement -->
+        <div class="card" style="margin-top: 24px;">
+            <div class="card-title">
+                <span><i class="fa-solid fa-users"></i> Individual Roommate Statement</span>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Member Name</th>
+                            <th>Phone</th>
+                            <th>Required Share</th>
+                            <th>Status</th>
+                            <th>Amount Cleared</th>
+                            <th>Payment Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="member-statement-tbody">
+                        <!-- Loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script dependencies -->
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+</html>

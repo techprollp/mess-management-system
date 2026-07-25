@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room 803 Mess Management System</title>
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Target for layout injection by app.js -->
+    <div id="app">
+        
+        <!-- Header Bar -->
+        <div class="header-bar">
+            <div class="page-title">
+                <h2>Room 803 Mess Portal</h2>
+                <p>Public View - Meal Plans, Payment Status & Current Dues Balance</p>
+            </div>
+            <div class="header-actions">
+                <a href="login.html" class="btn btn-primary"><i class="fa-solid fa-lock"></i> Admin Login</a>
+            </div>
+        </div>
+
+        <!-- Dashboard Stats Grid with Current Balance -->
+        <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="stat-card info">
+                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Total Roommates</div>
+                    <div class="stat-value" id="stat-total-members">--</div>
+                </div>
+            </div>
+            <div class="stat-card warning">
+                <div class="stat-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Total Expenses</div>
+                    <div class="stat-value" id="stat-total-expenses">AED 0</div>
+                </div>
+            </div>
+            <div class="stat-card success">
+                <div class="stat-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Amount Collected</div>
+                    <div class="stat-value" id="stat-amount-collected">AED 0</div>
+                </div>
+            </div>
+            <div class="stat-card danger">
+                <div class="stat-icon"><i class="fa-solid fa-scale-unbalanced"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Current Pending Balance</div>
+                    <div class="stat-value" id="stat-pending-balance">AED 0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Grid Layout -->
+        <div class="dashboard-grid">
+            
+            <!-- Left Side: Today's Menu and Member Search -->
+            <div>
+                <!-- Today's Menu Widget -->
+                <div class="card menu-widget">
+                    <div class="menu-day-title">
+                        <span><i class="fa-solid fa-utensils"></i> TODAY'S MEAL PLAN</span>
+                        <span id="menu-today-name">--</span>
+                    </div>
+                    <div class="menu-meals">
+                        <div class="menu-meal-block">
+                            <div class="meal-label"><i class="fa-solid fa-sun"></i> Lunch</div>
+                            <div class="meal-value" id="menu-lunch-value">Loading...</div>
+                        </div>
+                        <div class="menu-meal-block" style="border-top: 1px solid var(--border-color); padding-top: 16px;">
+                            <div class="meal-label" style="color: var(--info);"><i class="fa-solid fa-moon"></i> Dinner</div>
+                            <div class="meal-value" id="menu-dinner-value">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member Search & Quick Status Tracker -->
+                <div class="card">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-magnifying-glass"></i> Check My Payment Status & Net Owed Share</span>
+                    </div>
+                    <div class="form-group" style="position: relative;">
+                        <input type="text" id="member-search-input" class="form-control" placeholder="Type your roommate name..." style="padding-left: 40px;">
+                        <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 16px; top: 14px; color: var(--text-muted);"></i>
+                    </div>
+
+                    <!-- Compact view of filtered member list -->
+                    <div id="search-results" class="quick-list">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Weekly Menu & Quick Info -->
+            <div>
+                <!-- Dynamic Room Mess Rules Panel -->
+                <div class="card" style="background: linear-gradient(135deg, rgba(30,64,175,0.05), rgba(14,165,233,0.05)); border-color: rgba(59,130,246,0.2);">
+                    <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--primary-light);"><i class="fa-solid fa-circle-info"></i> Room 803 Mess Rules</h3>
+                    <ul id="public-rules-list" style="font-size: 13px; color: var(--text-muted); padding-left: 18px; line-height: 1.8;">
+                        <!-- Loaded dynamically -->
+                    </ul>
+                </div>
+
+                <!-- Summary Menu Planner overview -->
+                <div class="card">
+                    <div class="card-title" style="font-size: 15px; margin-bottom: 12px;">
+                        <span><i class="fa-solid fa-calendar-days"></i> Weekly Menu Overview</span>
+                        <a href="login.html" style="font-size: 12px; text-decoration: none; color: var(--primary-light);">Edit Menu</a>
+                    </div>
+                    <div class="quick-list" id="weekly-overview-list" style="font-size: 13px;">
+                        <!-- Filled by script -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Script dependencies with forced cache buster v=21.0 -->
+    <script src="js/storage.js?v=21.0"></script>
+    <script src="js/app.js?v=21.0"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const date = new Date();
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const todayDay = days[date.getDay()];
+            
+            document.addEventListener("db-updated", () => {
+                loadPublicPortal();
+            });
+
+            function loadPublicPortal() {
+                const selectedMonth = db.getSelectedMonth();
+                const stats = db.getStats(selectedMonth);
+                const settings = db.getSettings();
+                const currency = settings.currency || "AED";
+
+                document.getElementById("stat-total-members").textContent = stats.totalMembers;
+                document.getElementById("stat-total-expenses").textContent = `${currency} ${stats.totalExpenses.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById("stat-amount-collected").textContent = `${currency} ${stats.amountCollected.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById("stat-pending-balance").textContent = `${currency} ${stats.balance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+                const rulesList = document.getElementById("public-rules-list");
+                rulesList.innerHTML = "";
+                const rules = db.getRules();
+                rules.forEach(rule => {
+                    const li = document.createElement("li");
+                    li.textContent = rule;
+                    rulesList.appendChild(li);
+                });
+
+                const menu = db.getMenu();
+                const todayMenu = menu[todayDay] || { lunch: "Not Scheduled", dinner: "Not Scheduled" };
+                
+                document.getElementById("menu-today-name").textContent = todayDay;
+                document.getElementById("menu-lunch-value").textContent = todayMenu.lunch || "Not Scheduled";
+                document.getElementById("menu-dinner-value").textContent = todayMenu.dinner || "Not Scheduled";
+
+                const weeklyOverview = document.getElementById("weekly-overview-list");
+                weeklyOverview.innerHTML = "";
+                days.forEach(day => {
+                    const dayMenu = menu[day] || { lunch: "--", dinner: "--" };
+                    const dayItem = document.createElement("div");
+                    dayItem.className = "quick-list-item";
+                    dayItem.style.padding = "8px 12px";
+                    if(day === todayDay) {
+                        dayItem.style.border = "1.5px solid var(--primary-light)";
+                        dayItem.style.backgroundColor = "rgba(59, 130, 246, 0.05)";
+                    }
+                    dayItem.innerHTML = `
+                        <div class="quick-item-details">
+                            <span class="quick-item-title" style="font-size: 13px;">${day} ${day === todayDay ? '<span class="badge badge-success" style="padding: 2px 6px; font-size:9px;">Today</span>' : ''}</span>
+                            <span class="quick-item-sub" style="font-size: 11px;">L: ${dayMenu.lunch || '--'}</span>
+                            <span class="quick-item-sub" style="font-size: 11px;">D: ${dayMenu.dinner || '--'}</span>
+                        </div>
+                    `;
+                    weeklyOverview.appendChild(dayItem);
+                });
+
+                const members = stats.members;
+                const payments = stats.payments;
+                const memberShares = stats.memberShares;
+                const searchInput = document.getElementById("member-search-input");
+                const resultsContainer = document.getElementById("search-results");
+
+                function renderFilteredMembers(query = "") {
+                    resultsContainer.innerHTML = "";
+                    const filtered = members.filter(m => m.name.toLowerCase().includes(query.toLowerCase()));
+
+                    if (filtered.length === 0) {
+                        resultsContainer.innerHTML = `
+                            <div class="empty-state" style="padding: 20px;">
+                                <i class="fa-solid fa-user-slash" style="font-size: 24px;"></i>
+                                <p>No active roommate found matching "${query}"</p>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    filtered.forEach(member => {
+                        const payInfo = payments[member.id];
+                        const isPaid = payInfo ? payInfo.paid : false;
+                        
+                        const share = memberShares[member.id] || { netShareAmount: 0, grossShareAmount: 0, advancePaid: 0, applicableBillCount: 0, mealsEaten: 0 };
+                        const displayAmount = isPaid ? (payInfo.amount || share.netShareAmount) : share.netShareAmount;
+                        
+                        const item = document.createElement("div");
+                        item.className = "quick-list-item";
+                        item.innerHTML = `
+                            <div class="quick-item-details">
+                                <span class="quick-item-title">${member.name}</span>
+                                <span class="quick-item-sub"><i class="fa-solid fa-utensils"></i> ${share.mealsEaten} meals &bull; <i class="fa-solid fa-receipt"></i> ${share.applicableBillCount} invoice(s)</span>
+                                ${share.advancePaid > 0 ? `<span style="font-size:10px; color:var(--success); font-weight:600;"><i class="fa-solid fa-hand-holding-hand"></i> Advance Credit: ${currency} ${share.advancePaid.toFixed(2)}</span>` : ''}
+                            </div>
+                            <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                <span class="badge ${isPaid ? 'badge-success' : 'badge-danger'}">
+                                    <i class="fa-solid ${isPaid ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
+                                    ${isPaid ? 'Paid' : 'Pending'}
+                                </span>
+                                <span style="font-size: 12px; font-weight: 700; color:${isPaid ? 'var(--success)' : 'var(--danger)'};">
+                                    ${isPaid ? `Cleared: ${currency} ${displayAmount.toFixed(2)}` : `Owes Net: ${currency} ${displayAmount.toFixed(2)}`}
+                                </span>
+                            </div>
+                        `;
+                        resultsContainer.appendChild(item);
+                    });
+                }
+
+                renderFilteredMembers(searchInput.value);
+
+                searchInput.oninput = (e) => {
+                    renderFilteredMembers(e.target.value);
+                };
+            }
+
+            loadPublicPortal();
+        });
+    </script>
+</body>
+</html>

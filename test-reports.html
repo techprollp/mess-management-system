@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body>
+    <div id="error-log"></div>
+    <select id="report-month-select"></select>
+    <button id="print-report-btn"></button>
+    <button id="export-csv-btn"></button>
+    <div id="rep-active-members"></div>
+    <div id="rep-total-expenses"></div>
+    <div id="rep-fee-per-member"></div>
+    <div id="rep-total-collected"></div>
+    <div id="rep-pending-balance"></div>
+    <tbody id="category-report-tbody"></tbody>
+    <tbody id="member-statement-tbody"></tbody>
+    <span id="print-billing-month"></span>
+    <canvas id="reportChart"></canvas>
+    
+    <script>
+        window.onerror = function(msg, url, line) {
+            document.getElementById('error-log').innerHTML += `<p style="color:red">Error: ${msg} at line ${line}</p>`;
+        };
+        const db = {
+            getSettings: () => ({ currency: 'AED' }),
+            getBills: () => [],
+            getPayments: () => ({}),
+            getSelectedMonth: () => '2026-07',
+            getMonthRange: () => ({ label: 'July 2026' }),
+            getStats: () => ({
+                monthRange: { label: 'July 2026', shortLabel: 'Jul 26' },
+                isClosed: false,
+                totalMembers: 0,
+                totalExpenses: 0,
+                costPerMeal: 0,
+                amountCollected: 0,
+                balance: 0,
+                bills: [],
+                members: [],
+                payments: {},
+                memberShares: {}
+            }),
+            getMessMonthFromDate: () => '2026-07'
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+</html>
